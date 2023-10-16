@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "../DeviceController/DeviceHandler.h"
+#include "../Controller/DeviceHandler.h"
 #include "CppUnitTest.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
