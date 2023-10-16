@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Remote launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "/root/projects/DeviceController/bin/ARM64/Debug/${fileBasenameNoExtension}.out",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",
+        "ssh": {
+          "host": "localhost",
+          "cwd": "/root/projects/DeviceController/bin/ARM64/Debug",
+          "user": "root",
+          "password": "password",
+          "port": 2222,
+          "useAgent": false,
+          "forwardX11": false
+        },
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "C/C++: g++ build active file"
+      }
+    ]
+  }
