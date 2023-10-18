@@ -2,7 +2,10 @@
 
 #include "DateTimeProvider.h"
 #include "LogHandler.h"
+
+#include <iosfwd>
 #include <iostream>
+#include <ostream>
 #include <stdexcept>
 
 LogHandler::LogHandler() = default;
@@ -10,7 +13,7 @@ LogHandler::LogHandler() = default;
 LogHandler LogHandler::CreateLogger(const int level) {
     LogHandler handler;
     handler.Level = level;
-    handler.CreateLogFile();
+    handler.OpenOrCreateLogFile();
     return handler;
 }
 
@@ -35,15 +38,7 @@ void LogHandler::LogError(const std::string& message) {
 }
 
 void LogHandler::Log(const std::string& level, const std::string& message) {
-    if (const auto currentDay = DateTimeProvider::GetFormattedDate(); Name != currentDay) {
-        CloseLogFile();
-        Name = currentDay;
-        CreateLogFile();
-    }
-    if (!File.is_open()) {
-        throw std::runtime_error("Log file is not open.");
-    }
-
+    OpenOrCreateLogFile();
     const auto output = DateTimeProvider::GetFormattedTime() + ": [" + level + "] " + message;
     File << output << "\n" << std::flush;
     std::cerr << output << std::endl;
@@ -55,10 +50,13 @@ void LogHandler::CloseLogFile() {
     }
 }
 
-void LogHandler::CreateLogFile() {
+void LogHandler::OpenOrCreateLogFile() {
+    if (const auto currentDay = DateTimeProvider::GetFormattedDate(); Name != currentDay) {
+        CloseLogFile();
+        Name = currentDay;
+    }
     File.open(Name + ".log", std::ios::app);
     if (!File.is_open()) {
         throw std::runtime_error("Failed to open or create log file.");
     }
-
 }

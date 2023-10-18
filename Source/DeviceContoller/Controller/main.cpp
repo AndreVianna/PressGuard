@@ -1,6 +1,7 @@
+#include "FileDataStore.h"
 #include "DeviceHandler.h"
+#include "HubConnectionHandler.h"
 #include "LogHandler.h"
-#include <string>
 
 int main(const int argc, char* argv[]) {
     const auto logLevel = argc > 1 ? std::stoi(argv[1]) : 2;
@@ -11,10 +12,10 @@ int main(const int argc, char* argv[]) {
     auto logger = LogHandler::CreateLogger(logLevel);
 
     try {
-        auto dataFile = DataFileHandler::CreateFile();
+        auto store = FileDataStore::Create();
         HubConnectionHandler hub(deviceId, &logger);
 
-        const DeviceHandler deviceHandler(&dataFile, &hub, &logger, numSensors, sleepDelay);
+        const DeviceHandler deviceHandler(&store, &hub, &logger, numSensors, sleepDelay);
 
         while (true) {
             deviceHandler.ProcessSignals();

@@ -2,9 +2,12 @@
 
 #include "LogHandler.h"
 
-#include <string>
+#include <bits/stdint-uintn.h>
+#include <websocketpp/common/connection_hdl.hpp>
 #include <websocketpp/config/asio_no_tls.hpp>
-#include <websocketpp/server.hpp>
+#include <websocketpp/endpoint.hpp>
+#include <websocketpp/roles/server_endpoint.hpp>
+
 
 class HubConnectionHandler {
 public:

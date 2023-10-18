@@ -1,18 +1,21 @@
+#include "FileDataStore.h"
 #include "DeviceHandler.h"
 #include "HubConnectionHandler.h"
+#include "LogHandler.h"
 #include "Messages.h"
+
 #include <pigpio.h>
 #include <stdexcept>
 
 DeviceHandler::DeviceHandler(
-    DataFileHandler* dataFile,
+    FileDataStore* store,
     HubConnectionHandler* hub,
     LogHandler* logger,
     const int numberOfSensors,
     const int delayBetweenScansInMilliseconds)
     : NumberOfSensors(numberOfSensors)
     , DelayBetweenScansInMilliseconds(delayBetweenScansInMilliseconds)
-    , DataFile(dataFile)
+    , Store(store)
     , Hub(hub)
     , Logger(logger) {
     Initialise();
@@ -35,7 +38,7 @@ void DeviceHandler::ProcessSignals() const
     }
 
     Logger->LogInfo(dataLine);
-    dataLine = DataFile->AppendLine(dataLine);
+    dataLine = Store->Save(dataLine);
     Hub->SendData(dataLine);
     Sleep();
 }

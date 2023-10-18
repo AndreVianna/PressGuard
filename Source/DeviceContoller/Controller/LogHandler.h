@@ -1,7 +1,7 @@
 #pragma once
 
 #include <fstream>
-#include <string>
+#include <iosfwd>
 
 class LogHandler {
 public:
@@ -14,7 +14,7 @@ public:
 protected:
     void Log(const std::string& level, const std::string& message);
 private:
-    void CreateLogFile();
+    void OpenOrCreateLogFile();
     void CloseLogFile();
     std::ofstream File;
     std::string Name;

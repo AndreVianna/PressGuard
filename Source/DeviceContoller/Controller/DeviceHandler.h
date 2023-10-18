@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DataFileHandler.h"
+#include "FileDataStore.h"
 #include "HubConnectionHandler.h"
 #include "LogHandler.h"
 
@@ -9,7 +9,7 @@ public:
     static constexpr int DEFAULT_NUMBER_OF_SENSORS = 8;
     static constexpr int DEFAULT_DELAY_BETWEEN_SCANS_IN_MILLISECONDS = 500; // 0.5s
 
-    explicit DeviceHandler(DataFileHandler* dataFile,
+    explicit DeviceHandler(FileDataStore* store,
                            HubConnectionHandler* hub,
                            LogHandler* logger,
                            int numberOfSensors = DEFAULT_NUMBER_OF_SENSORS,
@@ -19,7 +19,7 @@ public:
 private:
     int NumberOfSensors;
     int DelayBetweenScansInMilliseconds;
-    DataFileHandler* DataFile;
+    FileDataStore* Store;
     HubConnectionHandler* Hub;
     LogHandler* Logger;
 

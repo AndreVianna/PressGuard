@@ -1,9 +1,7 @@
 #include "HubConnectionHandler.h"
 #include "LogHandler.h"
 
-#include <string>
-#include <websocketpp/config/asio_no_tls.hpp>
-#include <websocketpp/server.hpp>
+#include <websocketpp/frame.hpp>
 
 HubConnectionHandler::HubConnectionHandler(
     const ushort deviceId,
