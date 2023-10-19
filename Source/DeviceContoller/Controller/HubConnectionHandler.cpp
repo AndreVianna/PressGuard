@@ -1,6 +1,7 @@
 #include "HubConnectionHandler.h"
 #include "LogHandler.h"
 
+#include <thread>
 #include <websocketpp/frame.hpp>
 
 HubConnectionHandler::HubConnectionHandler(
@@ -11,14 +12,21 @@ HubConnectionHandler::HubConnectionHandler(
     , Logger(logger) {
     Server.init_asio();
     Server.set_open_handler([this](const ConnectionHandle& connection) {
+        Logger->LogWarning("Open requested.");
+        if (IsConnected) return;
+        Logger->LogWarning("Opening requested.");
         Connection = connection;
         IsConnected = true;
+        Logger->LogWarning("Opened.");
     });
-    Server.set_close_handler([this](const ConnectionHandle& connection) {
+    Server.set_close_handler([this](const ConnectionHandle&) {
+        Logger->LogWarning("Close requested.");
+        if (!IsConnected) return;
+        Logger->LogWarning("Closing connection.");
         IsConnected = false;
-        Connection = connection;
+        Logger->LogWarning("Closed..");
     });
-    Server.set_message_handler([this](auto&& ph1, auto&& ph2) {
+    Server.set_message_handler([this](auto&&, auto&& ph2) {
         OnDataReceived(std::forward<decltype(ph2)>(ph2));
     });
 }
@@ -26,7 +34,10 @@ HubConnectionHandler::HubConnectionHandler(
 void HubConnectionHandler::Start() {
     Server.listen(DeviceId);
     Server.start_accept();
-    Server.run();
+    std::thread serverThread([&] {
+        Server.run();
+    });
+    serverThread.detach();
 }
 
 void HubConnectionHandler::RegisterAction(const std::string& key, ActionDelegate action) {
@@ -37,7 +48,7 @@ void HubConnectionHandler::SendData(const std::string& data) {
     const auto outgoingMessage = std::to_string(DeviceId) + "," + data;
     Logger->LogInfo("Sending: " + outgoingMessage);
     if (!IsConnected) {
-        Logger->LogWarning("Connection is not open. Message not sent.");
+        Logger->LogInfo("Connection is not open. Message not sent.");
         return;
     }
 

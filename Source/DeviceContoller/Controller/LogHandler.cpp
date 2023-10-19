@@ -8,14 +8,15 @@
 #include <ostream>
 #include <stdexcept>
 
-LogHandler::LogHandler() = default;
-
-LogHandler LogHandler::CreateLogger(const int level) {
-    LogHandler handler;
-    handler.Level = level;
-    handler.OpenOrCreateLogFile();
-    return handler;
+LogHandler::LogHandler(const int level) {
+    Level = level;
+    OpenOrCreateLogFile();
 }
+
+LogHandler::~LogHandler() {
+    CloseLogFile();
+}
+
 
 void LogHandler::LogDebug(const std::string& message) {
     if (Level > 0) return;
@@ -41,22 +42,21 @@ void LogHandler::Log(const std::string& level, const std::string& message) {
     OpenOrCreateLogFile();
     const auto output = DateTimeProvider::GetFormattedTime() + ": [" + level + "] " + message;
     File << output << "\n" << std::flush;
+    File.flush();
     std::cerr << output << std::endl;
 }
 
 void LogHandler::CloseLogFile() {
-    if (File.is_open()) {
-        File.close();
-    }
+    if (!File.is_open()) return;
+    File.close();
 }
 
 void LogHandler::OpenOrCreateLogFile() {
-    if (const auto currentDay = DateTimeProvider::GetFormattedDate(); Name != currentDay) {
-        CloseLogFile();
-        Name = currentDay;
-    }
+    const auto currentDay = DateTimeProvider::GetFormattedDate();
+    if (Name == currentDay) return;
+    CloseLogFile();
+    Name = currentDay;
     File.open(Name + ".log", std::ios::app);
-    if (!File.is_open()) {
-        throw std::runtime_error("Failed to open or create log file.");
-    }
+    if (File.is_open()) return;
+    throw std::runtime_error("Failed to open or create log file.");
 }

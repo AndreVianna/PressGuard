@@ -5,12 +5,12 @@
 
 class LogHandler {
 public:
-    LogHandler();
-    static LogHandler CreateLogger(int level);
+    LogHandler(int level);
     void LogDebug(const std::string& message);
     void LogInfo(const std::string& message);
     void LogWarning(const std::string& message);
     void LogError(const std::string& message);
+    ~LogHandler();
 protected:
     void Log(const std::string& level, const std::string& message);
 private:

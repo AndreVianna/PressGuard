@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { DataAggregatorService } from './services/data-aggregator.service';
+import { WebSocketService } from './services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -14,24 +9,26 @@ interface WeatherForecast {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
+  title = 'Local Hub';
 
-  constructor(private http: HttpClient) {}
+  public deviceData: any = null;
+  public error: any = null;
 
-  ngOnInit() {
-    this.getForecasts();
-  }
-
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
+  constructor(
+    private http: HttpClient,
+    private webSocketService: WebSocketService,
+    private dataAggregatorService: DataAggregatorService) {
+    this.webSocketService.connect(9876);
+    this.dataAggregatorService.error.subscribe(error => {
+        this.error = error;
       }
     );
   }
 
-  title = 'localhub.client';
+
+  ngOnInit() {
+    this.dataAggregatorService.latestData.subscribe(data => {
+      this.deviceData = data;
+    });
+  }
 }

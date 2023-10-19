@@ -9,13 +9,14 @@ int main(const int argc, char* argv[]) {
     const auto numSensors = argc > 3 ? std::stoi(argv[3]) : DeviceHandler::DEFAULT_NUMBER_OF_SENSORS;
     const auto sleepDelay = argc > 4 ? std::stoi(argv[4]) : DeviceHandler::DEFAULT_DELAY_BETWEEN_SCANS_IN_MILLISECONDS;
 
-    auto logger = LogHandler::CreateLogger(logLevel);
+    LogHandler logger(logLevel);
 
     try {
-        auto store = FileDataStore::Create();
+        FileDataStore store;
         HubConnectionHandler hub(deviceId, &logger);
-
         const DeviceHandler deviceHandler(&store, &hub, &logger, numSensors, sleepDelay);
+
+        hub.Start();
 
         while (true) {
             deviceHandler.ProcessSignals();

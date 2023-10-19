@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, EMPTY } from 'rxjs';
 import { Environment } from 'src/environments/environment';
 import { Device, Configuration } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService {
-  private ws: WebSocket;
-  private subject!: Subject<MessageEvent>;
+export class WebSocketService {
   private config: Configuration = Environment;
+  private ws!: WebSocket;
+  private subject!: Subject<MessageEvent>;
 
-  constructor(deviceId: number) {
-    const device = this.config.Devices[deviceId];
-    if (!deviceId) {
-      throw new Error(`Invalid device is.`);
-    }
-    const wsUrl = `ws://${device.Address}:${deviceId}`;
-    this.ws = new WebSocket(wsUrl);
-    this.connect();
+  constructor() {
   }
 
-  public connect(): Subject<MessageEvent> {
+  public connect(deviceId: number): Subject<MessageEvent> {
+    const device = this.config.Devices[deviceId];
+    if (!deviceId) {
+      throw new Error(`Invalid device id.`);
+    }
+
+    const wsUrl = `ws://${device.Address}:${deviceId}`;
+    this.ws = new WebSocket(wsUrl);
     this.subject = new Subject();
 
     this.ws.onmessage = (event) => {
@@ -40,6 +40,10 @@ export class WebsocketService {
   }
 
   public getObservable(): Observable<MessageEvent> {
+    if (!this.subject) {
+      console.error("Connection has not been established yet. Call the connect() method first.");
+      return EMPTY;  // EMPTY is a predefined empty Observable
+    }
     return this.subject.asObservable();
   }
 

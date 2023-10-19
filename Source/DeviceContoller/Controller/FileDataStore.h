@@ -5,10 +5,10 @@
 
 class FileDataStore {
 public:
-    static FileDataStore Create();
-    std::string Save(const std::string& message);
-private:
     FileDataStore();
+    std::string Save(const std::string& message);
+    ~FileDataStore();
+private:
     void OpenOrCreateFile();
     void CloseFile();
     std::ofstream File;
