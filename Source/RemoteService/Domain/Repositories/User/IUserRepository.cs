@@ -4,6 +4,6 @@ using UserModel = RemoteService.Handlers.Auth.User;
 
 namespace RemoteService.Repositories.User;
 
-public interface IUserRepository : IRepository<Handlers.Auth.User, UserRow> {
+public interface IUserRepository : IRepository<UserModel, UserRow> {
     Task<UserModel?> VerifyAsync(SignIn signIn, CancellationToken cancellation = default);
 }

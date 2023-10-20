@@ -14,7 +14,7 @@ public class EmailSender : IEmailSender {
         var token = _tokenGenerator.GenerateEmailConfirmationToken(user);
         var mailBody = GetConfirmationEmailBody(token);
         var mailMessage = new MailMessage {
-            From = new MailAddress("no-reply@roleplayready.com"),
+            From = new MailAddress("no-reply@pressguard.com"),
             Body = mailBody,
             Subject = "Account Confirmation",
             IsBodyHtml = true,
@@ -26,12 +26,12 @@ public class EmailSender : IEmailSender {
 
         using var client = new SmtpClient("smtp.gmail.com", 587) {
             EnableSsl = true,
-            Credentials = new NetworkCredential("roleplayready@gmail.com", "password")
+            Credentials = new NetworkCredential("pressguard@gmail.com", "password")
         };
         await client.SendMailAsync(mailMessage, ct);
     }
 
-    private string GetConfirmationEmailBody(string token)
+    private static string GetConfirmationEmailBody(string token)
         => $"""
            <h1>Please click the following link to confirm your account:</h1><br/>
            <a href=\"https://example.com/confirm?token={token}\">Confirm your account</a>";

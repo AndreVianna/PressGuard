@@ -156,7 +156,7 @@ public class CrudResultTests {
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().HaveCount(1);
+        result.Errors.Should().ContainSingle();
     }
 
     [Fact]
@@ -182,7 +182,7 @@ public class CrudResultTests {
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().HaveCount(1);
+        result.Errors.Should().ContainSingle();
     }
 
     [Fact]

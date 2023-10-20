@@ -44,7 +44,7 @@ builder.Services.AddControllers(options => options.Filters.Add<CustomExceptionFi
     .ConfigureApiBehaviorOptions(options => options.SuppressMapClientErrors = true);
 
 builder.Services.AddEndpointsApiExplorer();
-const string apiTitle = "RolePlayReady API";
+const string apiTitle = "RemoteService.API";
 const string apiVersion = "v1";
 const string authHeaderKey = "Authorization";
 builder.Services.AddSwaggerGen(c => {

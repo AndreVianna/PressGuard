@@ -62,7 +62,7 @@ public class UserRepository : IUserRepository {
     }
 
     private async Task<Handlers.Auth.User?> GetByEmailAsync(string email, CancellationToken ct = default)
-        => _emailIndex.ContainsKey(email)
-            ? await GetByIdAsync(_emailIndex[email], ct)
+        => _emailIndex.TryGetValue(email, out var value)
+            ? await GetByIdAsync(value, ct)
             : default;
 }

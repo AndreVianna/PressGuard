@@ -5,7 +5,7 @@ namespace RemoteService.Handlers.System;
 public class SystemTests {
     [Fact]
     public void Constructor_CreatesInstance() {
-        var system = new Handlers.System.System {
+        var system = new System {
             Name = "TestName",
             Description = "TestDescription",
             Domains = new List<Base> {

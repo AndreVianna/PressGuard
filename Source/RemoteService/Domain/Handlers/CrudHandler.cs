@@ -45,7 +45,7 @@ public class CrudHandler<TModel, TRowModel, TRepository>
             : Success(output);
     }
 
-    protected virtual Task<Result> OnAddingAsync(TModel input, CancellationToken ct = default) => Task.FromResult<Result>(Result.Success());
+    protected virtual Task<Result> OnAddingAsync(TModel input, CancellationToken ct = default) => Task.FromResult(Result.Success());
     protected virtual Task OnAddedAsync(TModel input, CancellationToken ct = default) => Task.CompletedTask;
 
     public virtual async Task<CrudResult<TModel>> UpdateAsync(TModel input, CancellationToken ct = default) {
@@ -64,7 +64,7 @@ public class CrudHandler<TModel, TRowModel, TRepository>
         return Success(output!);
     }
 
-    protected virtual Task<Result> OnUpdatingAsync(TModel original, TModel updated, CancellationToken ct = default) => Task.FromResult<Result>(Result.Success());
+    protected virtual Task<Result> OnUpdatingAsync(TModel original, TModel updated, CancellationToken ct = default) => Task.FromResult(Result.Success());
     protected virtual Task OnUpdatedAsync(TModel input, CancellationToken ct = default) => Task.CompletedTask;
 
     public virtual async Task<CrudResult> RemoveAsync(Guid id, CancellationToken ct = default) {
@@ -81,7 +81,7 @@ public class CrudHandler<TModel, TRowModel, TRepository>
         return Success();
     }
 
-    protected virtual Task<Result> OnRemovingAsync(TModel input, CancellationToken ct = default) => Task.FromResult<Result>(Result.Success());
+    protected virtual Task<Result> OnRemovingAsync(TModel input, CancellationToken ct = default) => Task.FromResult(Result.Success());
     protected virtual Task OnRemovedAsync(TModel input, CancellationToken ct = default) => Task.CompletedTask;
 
 }

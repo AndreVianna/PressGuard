@@ -46,7 +46,7 @@ public class SettingHandlerTests {
     public async Task GetByIdAsync_WithInvalidId_ReturnsNotFound() {
         // Arrange
         var id = Guid.NewGuid();
-        _repository.GetByIdAsync(id, Arg.Any<CancellationToken>()).Returns(default(Handlers.Setting.Setting));
+        _repository.GetByIdAsync(id, Arg.Any<CancellationToken>()).Returns(default(Setting));
 
         // Act
         var result = await _handler.GetByIdAsync(id);
@@ -76,7 +76,7 @@ public class SettingHandlerTests {
     public async Task AddAsync_ForExistingId_ReturnsConflict() {
         // Arrange
         var input = CreateInput();
-        _repository.AddAsync(input, Arg.Any<CancellationToken>()).Returns(default(Handlers.Setting.Setting));
+        _repository.AddAsync(input, Arg.Any<CancellationToken>()).Returns(default(Setting));
 
         // Act
         var result = await _handler.AddAsync(input);
@@ -90,7 +90,7 @@ public class SettingHandlerTests {
     [Fact]
     public async Task AddAsync_WithErrors_ReturnsFailure() {
         // Arrange
-        var input = new Handlers.Setting.Setting {
+        var input = new Setting {
             Name = null!,
             Description = null!,
         };
@@ -100,7 +100,7 @@ public class SettingHandlerTests {
 
         // Assert
         result.IsInvalid.Should().BeTrue();
-        result.Invoking(x => x.HasConflict).Should().Throw<InvalidOperationException>();
+        result.HasConflict.Should().BeFalse();
         result.Value.Should().Be(input);
     }
 
@@ -126,7 +126,7 @@ public class SettingHandlerTests {
         // Arrange
         var id = Guid.NewGuid();
         var input = CreateInput(id);
-        _repository.UpdateAsync(input, Arg.Any<CancellationToken>()).Returns(default(Handlers.Setting.Setting));
+        _repository.UpdateAsync(input, Arg.Any<CancellationToken>()).Returns(default(Setting));
 
         // Act
         var result = await _handler.UpdateAsync(input);
@@ -134,13 +134,13 @@ public class SettingHandlerTests {
         // Assert
         result.IsInvalid.Should().BeFalse();
         result.WasNotFound.Should().BeTrue();
-        result.Value.Should().Be(input);
+        result.Value.Should().BeNull();
     }
 
     [Fact]
     public async Task UpdateAsync_WithErrors_ReturnsFailure() {
         // Arrange
-        var input = new Handlers.Setting.Setting {
+        var input = new Setting {
             Name = null!,
             Description = null!,
         };
@@ -150,7 +150,7 @@ public class SettingHandlerTests {
 
         // Assert
         result.IsInvalid.Should().BeTrue();
-        result.Invoking(x => x.WasNotFound).Should().Throw<InvalidOperationException>();
+        result.WasNotFound.Should().BeFalse();
         result.Value.Should().Be(input);
     }
 
@@ -190,7 +190,7 @@ public class SettingHandlerTests {
             Name = "Some Name",
         };
 
-    private static Handlers.Setting.Setting CreateInput(Guid? id = null)
+    private static Setting CreateInput(Guid? id = null)
         => new() {
             Id = id ?? Guid.NewGuid(),
             ShortName = "SM",

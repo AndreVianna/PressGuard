@@ -166,7 +166,7 @@ public class HttpResultTests {
 
         // Assert
         result.IsOk.Should().BeFalse();
-        result.Errors.Should().HaveCount(1);
+        result.Errors.Should().ContainSingle();
     }
 
     [Fact]
@@ -192,7 +192,7 @@ public class HttpResultTests {
 
         // Assert
         result.IsOk.Should().BeFalse();
-        result.Errors.Should().HaveCount(1);
+        result.Errors.Should().ContainSingle();
     }
 
     [Fact]

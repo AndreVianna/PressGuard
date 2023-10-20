@@ -10,7 +10,7 @@ public static class ServiceCollectionExtensions {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ISystemRepository, SystemRepository>();
         services.AddScoped<ISettingRepository, SettingRepository>();
-        services.AddScoped(typeof(IJsonFileStorage<>), typeof(Repositories.JsonFileStorage<>));
+        services.AddScoped(typeof(IJsonFileStorage<>), typeof(JsonFileStorage<>));
         return services;
     }
 }

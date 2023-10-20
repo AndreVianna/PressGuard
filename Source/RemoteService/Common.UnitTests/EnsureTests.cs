@@ -7,7 +7,7 @@ public class EnsureTests {
     public void IsOfType_WhenArgumentIsOfWrongType_ThrowsArgumentNullException() {
         const int input = 12;
         var action = () => IsOfType<string>(input);
-        action.Should().Throw<ArgumentException>().WithMessage("'input' must be of type 'String'. Found: 'Int32'. (Parameter 'input')");
+        action.Should().Throw<ArgumentException>().WithMessage("'input' must be of type 'String'. Found: 'Integer'. (Parameter 'input')");
     }
 
     [Fact]
@@ -226,7 +226,7 @@ public class EnsureTests {
         const string method = "MethodName";
         var arguments = new object?[] { 1, "2", 3 };
         var action = () => ArgumentExistsAndIsOfType<string>(method, arguments, 0);
-        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[0] of 'MethodName'. Expected: String. Found: Int32. (Parameter 'arguments[0]')");
+        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[0] of 'MethodName'. Expected: String. Found: Integer. (Parameter 'arguments[0]')");
     }
 
     [Fact]
@@ -250,7 +250,7 @@ public class EnsureTests {
         const string method = "MethodName";
         var arguments = new object?[] { 1, "2", 3 };
         var action = () => ArgumentsAreAllOfType<int>(method, arguments);
-        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[1] of 'MethodName'. Expected: Int32. Found: String. (Parameter 'arguments[1]')");
+        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[1] of 'MethodName'. Expected: Integer. Found: String. (Parameter 'arguments[1]')");
     }
 
     [Fact]
@@ -274,7 +274,7 @@ public class EnsureTests {
         const string method = "MethodName";
         var arguments = new object?[] { 1, "2", 3 };
         var action = () => ArgumentExistsAndIsOfTypeOrDefault<string>(method, arguments, 0);
-        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[0] of 'MethodName'. Expected: String. Found: Int32. (Parameter 'arguments[0]')");
+        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[0] of 'MethodName'. Expected: String. Found: Integer. (Parameter 'arguments[0]')");
     }
 
     [Fact]
@@ -306,7 +306,7 @@ public class EnsureTests {
         const string method = "MethodName";
         var arguments = new object?[] { 1, "2", 3 };
         var action = () => ArgumentsAreAllOfTypeOrDefault<int>(method, arguments);
-        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[1] of 'MethodName'. Expected: Int32. Found: String. (Parameter 'arguments[1]')");
+        action.Should().Throw<ArgumentException>().WithMessage("Invalid type of arguments[1] of 'MethodName'. Expected: Integer. Found: String. (Parameter 'arguments[1]')");
     }
 
     [Fact]

@@ -12,7 +12,7 @@ public sealed class IsNullCommand : ValidationCommand {
     }
 
     public override Result Negate(object? subject) {
-        if (subject is null) return Result.Success();
+        if (subject is not null) return Result.Success();
         return Result.Invalid(InvertMessage(ValidationErrorMessage), Source, GetErrorMessageArguments(subject));
     }
 }

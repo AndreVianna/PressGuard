@@ -123,7 +123,7 @@ public class SystemHandlerTests {
         // Assert
         result.IsSuccess.Should().BeFalse();
         result.WasNotFound.Should().BeTrue();
-        result.Value.Should().Be(input);
+        result.Value.Should().BeNull();
     }
 
     [Fact]

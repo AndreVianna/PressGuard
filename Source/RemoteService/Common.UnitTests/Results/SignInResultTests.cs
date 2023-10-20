@@ -231,7 +231,7 @@ public class SignInResultTests {
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().HaveCount(1);
+        result.Errors.Should().ContainSingle();
         result.Token.Should().BeNull();
     }
 
@@ -258,6 +258,6 @@ public class SignInResultTests {
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Errors.Should().HaveCount(1);
+        result.Errors.Should().ContainSingle();
     }
 }

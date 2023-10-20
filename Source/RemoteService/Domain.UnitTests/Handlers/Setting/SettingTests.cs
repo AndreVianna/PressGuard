@@ -6,7 +6,7 @@ namespace RemoteService.Handlers.Setting;
 public class SettingTests {
     [Fact]
     public void Constructor_CreatesInstance() {
-        var agent = new Handlers.Setting.Setting {
+        var agent = new Setting {
             Name = "TestName",
             Description = "TestDescription"
         };
@@ -42,7 +42,7 @@ public class SettingTests {
                 ShortName = "TC2",
             },
         };
-        var testBase = new Handlers.Setting.Setting {
+        var testBase = new Setting {
             Name = "TestName",
             Description = "TestDescription",
             ShortName = "GSS",
@@ -76,7 +76,7 @@ public class SettingTests {
             },
             null!,
         };
-        var subject = new Handlers.Setting.Setting {
+        var subject = new Setting {
             Name = "TestName",
             Description = "TestDescription",
             ShortName = "GSS",

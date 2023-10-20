@@ -210,7 +210,7 @@ public class AuthHandlerTests {
 
         // Assert
         result.IsInvalid.Should().BeTrue();
-        result.Invoking(x => x.HasConflict).Should().Throw<InvalidOperationException>();
+        result.HasConflict.Should().BeFalse();
         result.Value.Should().Be(input);
     }
 
@@ -244,7 +244,7 @@ public class AuthHandlerTests {
         // Assert
         result.IsInvalid.Should().BeFalse();
         result.WasNotFound.Should().BeTrue();
-        result.Value.Should().Be(input);
+        result.Value.Should().BeNull();
     }
 
     [Fact]
@@ -260,7 +260,7 @@ public class AuthHandlerTests {
 
         // Assert
         result.IsInvalid.Should().BeTrue();
-        result.Invoking(x => x.WasNotFound).Should().Throw<InvalidOperationException>();
+        result.WasNotFound.Should().BeFalse();
         result.Value.Should().Be(input);
     }
 

@@ -11,7 +11,7 @@ public class EnumerableExtensionsTests {
 
         // Assert
         result.Should().BeOfType<int[]>();
-        result.Should().HaveCount(0);
+        result.Should().BeEmpty();
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class EnumerableExtensionsTests {
 
         // Assert
         result.Should().BeOfType<string[]>();
-        result.Should().HaveCount(0);
+        result.Should().BeEmpty();
     }
 
     [Fact]
