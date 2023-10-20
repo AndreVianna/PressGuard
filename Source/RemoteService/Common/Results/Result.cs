@@ -6,7 +6,7 @@ public record Result : IResult {
     protected Result(IEnumerable<ValidationError>? errors = null) {
         Errors = errors is null
             ? new()
-            : IsNotNullAndDoesNotContainNull(errors).ToList();
+            : IsNotNullAndDoesNotHaveNull(errors).ToList();
     }
 
     public IList<ValidationError> Errors { get; } = new List<ValidationError>();

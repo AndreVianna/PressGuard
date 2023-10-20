@@ -21,11 +21,13 @@ public record CrudResult : Result {
 
     public static new CrudResult Invalid(string message, string source, params object?[] args)
         => new(new ValidationError(message, source, args));
+    public static CrudResult Invalid(Result result)
+        => new(CrudResultType.Invalid, result.Errors);
 
     public static implicit operator CrudResult(List<ValidationError> errors)
-        => new(CrudResultType.Invalid, IsNotNullAndDoesNotContainNull(errors));
+        => new(CrudResultType.Invalid, IsNotNullAndDoesNotHaveNull(errors));
     public static implicit operator CrudResult(ValidationError[] errors)
-        => new(CrudResultType.Invalid, IsNotNullAndDoesNotContainNull(errors));
+        => new(CrudResultType.Invalid, IsNotNullAndDoesNotHaveNull(errors));
     public static implicit operator CrudResult(ValidationError error)
         => new(CrudResultType.Invalid, new[] { error }.AsEnumerable());
 

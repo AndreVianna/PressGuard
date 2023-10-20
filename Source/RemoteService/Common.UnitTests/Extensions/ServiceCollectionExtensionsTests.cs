@@ -5,7 +5,7 @@ public class ServiceCollectionExtensionsTests {
     public void AddDomainHandlers_RegisterHandlers() {
         var services = new ServiceCollection();
 
-        var result = services.AddDefaultSystemComponents();
+        var result = services.AddSystemUtilities();
 
         result.Should().BeSameAs(services);
     }

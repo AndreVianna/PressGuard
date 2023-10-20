@@ -4,15 +4,15 @@ namespace System.Results;
 
 public sealed record SignInResult : Result {
     private const string _invalidInvalidSignInCreation =
-        """"
+        """
         To create an invalid result assigned the errors directly.
         i.e. SingInResult result = new ValidationError(...);
-        """";
+        """;
     private const string _invalidSuccessfulSignInCreation =
-        """"
+        """
         To make a successful result assigned the token to it.
         i.e. SingInResult result = "[Token]";
-        """";
+        """;
 
     private SignInResultType _type;
 
@@ -39,6 +39,8 @@ public sealed record SignInResult : Result {
         => new(SignInResultType.Success, token);
     public static new SignInResult Invalid(string message, string source, params object?[] args)
         => new(SignInResultType.Invalid, null, new ValidationError[] { new(message, source, args) });
+    public static SignInResult Invalid(Result result)
+        => new(SignInResultType.Invalid, null, result.Errors);
 
     public static SignInResult Blocked() => new(SignInResultType.Blocked);
     public static SignInResult Locked() => new(SignInResultType.Locked);

@@ -31,9 +31,9 @@ public record HttpResult : Result {
     public static HttpResult Conflict() => new(HttpResultType.Conflict);
 
     public static implicit operator HttpResult(List<ValidationError> errors)
-        => new(HttpResultType.BadRequest, IsNotNullAndDoesNotContainNull(errors));
+        => new(HttpResultType.BadRequest, IsNotNullAndDoesNotHaveNull(errors));
     public static implicit operator HttpResult(ValidationError[] errors)
-        => new(HttpResultType.BadRequest, IsNotNullAndDoesNotContainNull(errors));
+        => new(HttpResultType.BadRequest, IsNotNullAndDoesNotHaveNull(errors));
     public static implicit operator HttpResult(ValidationError error)
         => new(HttpResultType.BadRequest, new[] { error }.AsEnumerable());
 

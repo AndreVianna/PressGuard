@@ -1,0 +1,12 @@
+POST https://localhost:7110/api/v1/account/login
+Content-Type: application/json
+
+{
+  "email": "default.user@email.com",
+  "password": "Invalid"
+}
+
+###
+
+GET https://localhost:7110/api/v1/systems
+Accept: application/json

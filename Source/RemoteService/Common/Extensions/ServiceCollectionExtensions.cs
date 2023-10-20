@@ -1,9 +1,9 @@
 ﻿namespace System.Extensions;
 
 public static class ServiceCollectionExtensions {
-    public static IServiceCollection AddDefaultSystemComponents(this IServiceCollection services) {
+    public static IServiceCollection AddSystemUtilities(this IServiceCollection services) {
         services.AddSingleton<DateTimeProvider>();
-        services.AddSingleton<FileSystemProvider>();
+        services.AddSingleton<FileSystemAccessor>();
         return services;
     }
 }
