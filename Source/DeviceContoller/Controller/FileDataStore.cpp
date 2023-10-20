@@ -1,13 +1,13 @@
-// FileDataStore.cpp
-
-#include "DateTimeProvider.h"
+#include "IDateTimeProvider.h"
 #include "FileDataStore.h"
 
 #include <iosfwd>
 #include <iostream>
 #include <stdexcept>
 
-FileDataStore::FileDataStore() {
+
+FileDataStore::FileDataStore(IDateTimeProvider* dateTime) {
+    DateTime = dateTime;
     OpenOrCreateFile();
 }
 
@@ -17,7 +17,7 @@ FileDataStore::~FileDataStore() {
 
 std::string FileDataStore::Save(const std::string& message) {
     OpenOrCreateFile();
-    auto output = DateTimeProvider::GetFormattedTime() + "," + message;
+    auto output = DateTime->GetFormattedTime() + "," + message;
     File << output << "\n" << std::flush;
     File.flush();
     return { output };
@@ -29,7 +29,7 @@ void FileDataStore::CloseFile() {
 }
 
 void FileDataStore::OpenOrCreateFile() {
-    const auto currentDay = DateTimeProvider::GetFormattedDate();
+    const auto currentDay = DateTime->GetFormattedDate();
     if (Name == currentDay) return;
     CloseFile();
     Name = currentDay;

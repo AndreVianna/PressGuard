@@ -3,32 +3,32 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;
-  let httpMock: HttpTestingController;
+    let component: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
+    let httpMock: HttpTestingController;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [HttpClientTestingModule]
-    }).compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [AppComponent],
+            imports: [HttpClientTestingModule]
+        }).compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
-    httpMock = TestBed.inject(HttpTestingController);
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AppComponent);
+        component = fixture.componentInstance;
+        httpMock = TestBed.inject(HttpTestingController);
+    });
 
-  afterEach(() => {
-    httpMock.verify();
-  });
+    afterEach(() => {
+        httpMock.verify();
+    });
 
-  it('should create the app', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create the app', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('should initialize without erros', () => {
-    component.ngOnInit();
-  });
+    it('should initialize without erros', () => {
+        component.ngOnInit();
+    });
 });

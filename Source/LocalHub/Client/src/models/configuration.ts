@@ -1,8 +1,8 @@
-import { Device } from "./device";
+import { Device } from './device';
 
 export interface Configuration {
-  IsProduction: boolean;
-  Devices: {
-    [Id: number]: Device;
-  };
+    UseFakeWebSocket: boolean,
+    IsProduction: boolean;
+    MaxLogLevel: number;
+    Devices: Map<number, Device>;
 }

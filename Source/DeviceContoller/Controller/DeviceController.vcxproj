@@ -47,7 +47,9 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
+  <ImportGroup Label="Shared">
+    <Import Project="..\ControllerDomain\ControllerDomain.vcxitems" Label="Shared" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -88,20 +90,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DateTimeProvider.cpp" />
-    <ClCompile Include="FileDataStore.cpp" />
     <ClCompile Include="DeviceHandler.cpp" />
+    <ClCompile Include="FileDataStore.cpp" />
     <ClCompile Include="HubConnectionHandler.cpp" />
     <ClCompile Include="LogHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Messages.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DateTimeProvider.h" />
-    <ClInclude Include="DeviceHandler.h" />
-    <ClInclude Include="FileDataStore.h" />
-    <ClInclude Include="LogHandler.h" />
-    <ClInclude Include="Messages.h" />
-    <ClInclude Include="HubConnectionHandler.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>

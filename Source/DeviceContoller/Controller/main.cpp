@@ -1,3 +1,4 @@
+#include "DateTimeProvider.h"
 #include "FileDataStore.h"
 #include "DeviceHandler.h"
 #include "HubConnectionHandler.h"
@@ -9,10 +10,11 @@ int main(const int argc, char* argv[]) {
     const auto numSensors = argc > 3 ? std::stoi(argv[3]) : DeviceHandler::DEFAULT_NUMBER_OF_SENSORS;
     const auto sleepDelay = argc > 4 ? std::stoi(argv[4]) : DeviceHandler::DEFAULT_DELAY_BETWEEN_SCANS_IN_MILLISECONDS;
 
-    LogHandler logger(logLevel);
+    DateTimeProvider dateTime;
+    LogHandler logger(logLevel, &dateTime);
 
     try {
-        FileDataStore store;
+        FileDataStore store(&dateTime);
         HubConnectionHandler hub(deviceId, &logger);
         const DeviceHandler deviceHandler(&store, &hub, &logger, numSensors, sleepDelay);
 

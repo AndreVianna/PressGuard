@@ -1,5 +1,5 @@
 export interface DeviceData {
-  Id: number;
-  Timestamp: string;
-  SensorValues: number[];
+    Id: number;
+    Timestamp: string;
+    SensorValues: number[];
 }

@@ -1,5 +1,5 @@
-#include "FileDataStore.h"
 #include "DeviceHandler.h"
+#include "FileDataStore.h"
 #include "HubConnectionHandler.h"
 #include "LogHandler.h"
 #include "Messages.h"
@@ -18,7 +18,7 @@ DeviceHandler::DeviceHandler(
     , Store(store)
     , Hub(hub)
     , Logger(logger) {
-    Initialise();
+    Initialize();
 }
 
 DeviceHandler::~DeviceHandler() {
@@ -29,21 +29,19 @@ void DeviceHandler::ProcessSignals() const
 {
     std::string dataLine;
     for (auto pin = 0; pin < NumberOfSensors; ++pin) {
-        if (const auto sensorValue = gpioRead(pin); sensorValue >= 0) {
-            dataLine += (dataLine.length() == 0 ? "" : ",") + std::to_string(sensorValue);
-        }
-        else {
-            Logger->LogError(Messages::GetFormattedMessage("SensorFail", std::to_string(pin)));
-        }
+        ReadSensor(pin, dataLine);
     }
 
     Logger->LogInfo(dataLine);
     dataLine = Store->Save(dataLine);
     Hub->SendData(dataLine);
+    Hub->PollData();
+
     Sleep();
 }
 
-void DeviceHandler::Initialise() const {
+void DeviceHandler::Initialize() const {
+    Logger->LogDebug("Initializing Handler.");
     if (const auto initResult = gpioInitialise(); initResult < 0) {
         const auto message = Messages::GetFormattedMessage("InitFail", std::to_string(initResult));
         Logger->LogError(message);
@@ -53,9 +51,19 @@ void DeviceHandler::Initialise() const {
     for (auto i = 0; i < NumberOfSensors; ++i) {
         gpioSetMode(i, PI_INPUT);
     }
+    Logger->LogDebug("Handler initialized.");
 }
 
 
 void DeviceHandler::Sleep() const {
     gpioDelay(DelayBetweenScansInMilliseconds * 1000);
+}
+
+void DeviceHandler::ReadSensor(int pin, std::string& dataLine) const {
+    if (const auto sensorValue = gpioRead(pin); sensorValue >= 0) {
+        dataLine += (dataLine.length() == 0 ? "" : ",") + std::to_string(sensorValue);
+        return;
+    }
+
+    Logger->LogWarning(Messages::GetFormattedMessage("SensorFail", std::to_string(pin)));
 }

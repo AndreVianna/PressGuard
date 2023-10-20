@@ -1,5 +1,3 @@
-// LogHandler.cpp
-
 #include "DateTimeProvider.h"
 #include "LogHandler.h"
 
@@ -8,8 +6,9 @@
 #include <ostream>
 #include <stdexcept>
 
-LogHandler::LogHandler(const int level) {
-    Level = level;
+LogHandler::LogHandler(const int level, IDateTimeProvider* dateTime)
+    : Level(level) {
+    DateTime = dateTime;
     OpenOrCreateLogFile();
 }
 
@@ -24,12 +23,12 @@ void LogHandler::LogDebug(const std::string& message) {
 }
 
 void LogHandler::LogInfo(const std::string& message) {
-    if (Level > 1) return;
+    if (Level == -1 || Level > 1) return;
     Log("INFO", message);
 }
 
 void LogHandler::LogWarning(const std::string& message) {
-    if (Level > 2) return;
+    if (Level == -1 || Level > 2) return;
     Log("WARN", message);
 }
 
@@ -40,7 +39,7 @@ void LogHandler::LogError(const std::string& message) {
 
 void LogHandler::Log(const std::string& level, const std::string& message) {
     OpenOrCreateLogFile();
-    const auto output = DateTimeProvider::GetFormattedTime() + ": [" + level + "] " + message;
+    const auto output = DateTime->GetFormattedTime() + ": [" + level + "] " + message;
     File << output << "\n" << std::flush;
     File.flush();
     std::cerr << output << std::endl;
@@ -52,7 +51,7 @@ void LogHandler::CloseLogFile() {
 }
 
 void LogHandler::OpenOrCreateLogFile() {
-    const auto currentDay = DateTimeProvider::GetFormattedDate();
+    const auto currentDay = DateTime->GetFormattedDate();
     if (Name == currentDay) return;
     CloseLogFile();
     Name = currentDay;

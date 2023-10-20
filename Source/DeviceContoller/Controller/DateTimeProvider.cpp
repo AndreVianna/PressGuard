@@ -1,5 +1,3 @@
-// DateTimeProvider.cpp
-
 #include "DateTimeProvider.h"
 #include <chrono>
 #include <ctime>

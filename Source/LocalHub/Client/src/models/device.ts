@@ -1,4 +1,3 @@
 export interface Device {
-  Address: string;
-  Delay: number;
+    Address: string;
 }

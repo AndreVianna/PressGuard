@@ -1,4 +1,4 @@
-﻿:host {
+:host {
     max-width: 1280px;
     padding: 2rem;
     text-align: center;
@@ -22,6 +22,30 @@ table {
 }
 
 .error {
-  color: red;
-  font-weight: bold;
+    color: red;
+    font-weight: bold;
+}
+
+.sensor-value-cell {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    margin: 2px;
+}
+
+#logsPanel {
+    justify-content: left;
+    align-items: left;
+}
+
+.log-container {
+    max-height: 400px;
+    width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: left;
 }
