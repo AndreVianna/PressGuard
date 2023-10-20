@@ -1,4 +1,4 @@
-namespace DataAccess.Extensions;
+namespace RemoteService.Extensions;
 
 public class ServiceCollectionExtensionsTests {
     [Fact]

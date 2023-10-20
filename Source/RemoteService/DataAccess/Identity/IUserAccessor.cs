@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Identity;
+﻿namespace RemoteService.Identity;
 
 public interface IUserAccessor {
     string Id { get; }

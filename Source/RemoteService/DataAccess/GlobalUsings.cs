@@ -12,7 +12,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
 
-global using DataAccess.Repositories;
+global using RemoteService.Repositories;
 global using RemoteService.Handlers.Auth;
 global using RemoteService.Handlers.Setting;
 global using RemoteService.Handlers.System;

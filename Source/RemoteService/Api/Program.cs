@@ -1,3 +1,5 @@
+using RemoteService.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var env = builder.Environment;

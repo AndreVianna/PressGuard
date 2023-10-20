@@ -1,7 +1,7 @@
-﻿namespace DataAccess.Repositories.Settings;
+﻿namespace RemoteService.Repositories.Settings;
 
 public static class SettingMapper {
-    public static SettingData ToData(this Setting input)
+    public static SettingData ToData(this Handlers.Setting.Setting input)
         => new() {
             Id = input.Id,
             State = input.State,
@@ -20,7 +20,7 @@ public static class SettingMapper {
             Name = input.Name,
         };
 
-    public static Setting? ToModel(this SettingData? input)
+    public static Handlers.Setting.Setting? ToModel(this SettingData? input)
         => input is null
             ? null
             : new() {

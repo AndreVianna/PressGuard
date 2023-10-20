@@ -1,4 +1,6 @@
-namespace DataAccess.Repositories.Settings;
+using RemoteService.Identity;
+
+namespace RemoteService.Repositories.Settings;
 
 public class SettingRepositoryTests {
     private readonly IJsonFileStorage<SettingData> _storage;
@@ -130,7 +132,7 @@ public class SettingRepositoryTests {
             }
         };
 
-    private static Setting GenerateInput(Guid? id = null)
+    private static Handlers.Setting.Setting GenerateInput(Guid? id = null)
         => new() {
             Id = id ?? Guid.NewGuid(),
             State = State.New,

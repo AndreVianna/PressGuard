@@ -1,6 +1,6 @@
 ﻿using GameSystem = RemoteService.Handlers.System.System;
 
-namespace DataAccess.Repositories.Systems;
+namespace RemoteService.Repositories.Systems;
 
 public static class SystemMapper {
     public static SystemData ToData(GameSystem input)

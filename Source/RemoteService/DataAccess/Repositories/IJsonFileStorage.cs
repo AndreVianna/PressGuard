@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Repositories;
+﻿namespace RemoteService.Repositories;
 
 public interface IJsonFileStorage<TData>
     where TData : class, IPersisted {

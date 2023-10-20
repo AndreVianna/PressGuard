@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Repositories.Systems;
+﻿namespace RemoteService.Repositories.Systems;
 
 public record SystemData : IPersisted  {
     public Guid Id { get; init; }

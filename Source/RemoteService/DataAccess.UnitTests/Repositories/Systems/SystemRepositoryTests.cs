@@ -1,6 +1,8 @@
+using RemoteService.Identity;
+
 using GameSystem = RemoteService.Handlers.System.System;
 
-namespace DataAccess.Repositories.Systems;
+namespace RemoteService.Repositories.Systems;
 
 public class SystemRepositoryTests {
     private readonly IJsonFileStorage<SystemData> _storage;

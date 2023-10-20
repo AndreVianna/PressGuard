@@ -1,6 +1,6 @@
-﻿using DataAccess.Identity;
+﻿using RemoteService.Identity;
 
-namespace DataAccess.Repositories.Settings;
+namespace RemoteService.Repositories.Settings;
 
 public class SettingRepository : ISettingRepository {
     private readonly IJsonFileStorage<SettingData> _files;
@@ -17,19 +17,19 @@ public class SettingRepository : ISettingRepository {
         return files.ToArray(SettingMapper.ToRow);
     }
 
-    public async Task<Setting?> GetByIdAsync(Guid id, CancellationToken ct = default) {
+    public async Task<Handlers.Setting.Setting?> GetByIdAsync(Guid id, CancellationToken ct = default) {
         var file = await _files
             .GetByIdAsync(id, ct)
             .ConfigureAwait(false);
         return file.ToModel();
     }
 
-    public async Task<Setting?> AddAsync(Setting input, CancellationToken ct = default) {
+    public async Task<Handlers.Setting.Setting?> AddAsync(Handlers.Setting.Setting input, CancellationToken ct = default) {
         var file = await _files.CreateAsync(input.ToData(), ct).ConfigureAwait(false);
         return file.ToModel();
     }
 
-    public async Task<Setting?> UpdateAsync(Setting input, CancellationToken ct = default) {
+    public async Task<Handlers.Setting.Setting?> UpdateAsync(Handlers.Setting.Setting input, CancellationToken ct = default) {
         var file = await _files.UpdateAsync(input.ToData(), ct);
         return file.ToModel();
     }

@@ -1,4 +1,6 @@
-namespace DataAccess.Repositories.Users;
+using RemoteService.Repositories.Auth;
+
+namespace RemoteService.Repositories.Users;
 
 public class UserRepositoryTests {
     private readonly IJsonFileStorage<UserData> _storage;

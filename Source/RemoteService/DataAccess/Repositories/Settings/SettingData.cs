@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Repositories.Settings;
+﻿namespace RemoteService.Repositories.Settings;
 
 public class SettingData : IPersisted {
     public Guid Id { get; init; }

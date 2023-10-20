@@ -1,7 +1,7 @@
-﻿namespace DataAccess.Repositories.Auth;
+﻿namespace RemoteService.Repositories.Auth;
 
 public static class UserMapper {
-    public static UserData ToData(this User input)
+    public static UserData ToData(this Handlers.Auth.User input)
         => new() {
             Id = input.Id,
 
@@ -28,7 +28,7 @@ public static class UserMapper {
     private static string GetFullName(UserData input) 
         => $"{input.FirstName}{(input.FirstName is not null && input.LastName is not null ? " " : string.Empty)}{input.LastName}";
 
-    public static User? ToModel(this UserData? input)
+    public static Handlers.Auth.User? ToModel(this UserData? input)
         => input is null
             ? null
             : new() {

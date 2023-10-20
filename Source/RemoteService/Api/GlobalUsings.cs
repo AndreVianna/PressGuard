@@ -13,8 +13,6 @@ global using System.Text;
 global using System.Text.Encodings.Web;
 global using System.Utilities;
 
-global using DataAccess.Identity;
-
 global using Microsoft.AspNetCore.Authentication;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc;
@@ -25,9 +23,6 @@ global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.OpenApi.Models;
 
 global using RemoteService.Handlers.Auth;
-
-global using DataAccess.Extensions;
-
 global using RemoteService.Extensions;
 global using RemoteService.Utilities;
 

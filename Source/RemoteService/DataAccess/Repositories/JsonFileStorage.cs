@@ -1,6 +1,6 @@
 ﻿using static System.Text.Json.JsonSerializer;
 
-namespace DataAccess.Repositories;
+namespace RemoteService.Repositories;
 
 public partial class JsonFileStorage<TData> : IJsonFileStorage<TData>
     where TData : Persisted {

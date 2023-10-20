@@ -1,3 +1,5 @@
+using RemoteService.Identity;
+
 namespace RemoteService.Utilities;
 
 [ExcludeFromCodeCoverage]

@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api\Api.csproj" />
+    <ProjectReference Include="..\Api\RemoteService.Api.csproj" />
   </ItemGroup>
 
 </Project>

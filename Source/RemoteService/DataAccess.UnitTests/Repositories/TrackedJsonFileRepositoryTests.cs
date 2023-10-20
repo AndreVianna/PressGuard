@@ -1,4 +1,4 @@
-namespace DataAccess.Repositories;
+namespace RemoteService.Repositories;
 
 public sealed class TrackedJsonFileRepositoryTests : IDisposable {
     private readonly FileSystemAccessor _io;

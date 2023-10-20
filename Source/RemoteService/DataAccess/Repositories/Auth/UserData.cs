@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Repositories.Auth;
+﻿namespace RemoteService.Repositories.Auth;
 
 public record UserData : IPersisted {
     public Guid Id { get; init; }

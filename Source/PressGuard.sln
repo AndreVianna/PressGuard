@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Solution Items", "0 Solut
 		testenvironments.json = testenvironments.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Device Controller", "1 Device Controller", "{96F895FF-813E-469F-834D-3249281F8C6B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Device Controller", "2 Device Controller", "{96F895FF-813E-469F-834D-3249281F8C6B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Local Hub", "2 Local Hub", "{F563B1A2-1ED5-410D-B0F9-2F370BB17925}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Local Hub", "3 Local Hub", "{F563B1A2-1ED5-410D-B0F9-2F370BB17925}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceController", "DeviceContoller\Controller\DeviceController.vcxproj", "{0D33CA40-25AA-4581-B299-D21C942884A6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Remote Service", "3 Remote Service", "{9B57B696-FF77-4C0D-9555-44315BF0D990}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Remote Service", "4 Remote Service", "{9B57B696-FF77-4C0D-9555-44315BF0D990}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalHub.Client.UnitTests", "LocalHub\ClientUnitTests\LocalHub.Client.UnitTests.csproj", "{A86F4262-A4B8-404C-9052-41E1C4E082D3}"
 EndProject
@@ -29,7 +29,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller.Domain", "Device
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceController.UnitTests", "DeviceContoller\ControllerUnitTests\DeviceController.UnitTests.vcxproj", "{6BD90C13-2D5D-4967-807B-00924980BE2F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Common", "0 Common", "{689B3678-F62A-4A30-8F4A-CF4DE2618993}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Common", "1 Common", "{689B3678-F62A-4A30-8F4A-CF4DE2618993}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "RemoteService\Common\Common.csproj", "{360B25E2-AEFC-4BFA-9109-F66059BD232C}"
 EndProject
@@ -39,19 +39,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.UnitTests", "RemoteS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Domain", "1 Domain", "{01D495BE-C6A9-47A7-AEF3-06F329522592}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "RemoteService\Domain\Domain.csproj", "{FF854B2A-6E36-4FF2-852E-A56490859A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Domain", "RemoteService\Domain\RemoteService.Domain.csproj", "{FF854B2A-6E36-4FF2-852E-A56490859A95}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.UnitTests", "RemoteService\Domain.UnitTests\Domain.UnitTests.csproj", "{5FCA1A15-865D-4503-8CB7-1BA4DE53A769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Domain.UnitTests", "RemoteService\Domain.UnitTests\RemoteService.Domain.UnitTests.csproj", "{5FCA1A15-865D-4503-8CB7-1BA4DE53A769}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "RemoteService\Api\Api.csproj", "{0BEDAEC7-9967-4102-8CFC-14B2D2ABEFAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Api", "RemoteService\Api\RemoteService.Api.csproj", "{0BEDAEC7-9967-4102-8CFC-14B2D2ABEFAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.UnitTests", "RemoteService\Api.UnitTests\Api.UnitTests.csproj", "{89E4C16D-5C38-45B0-8BD1-71C3A228BF22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Api.UnitTests", "RemoteService\Api.UnitTests\RemoteService.Api.UnitTests.csproj", "{89E4C16D-5C38-45B0-8BD1-71C3A228BF22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.IntegrationTests", "RemoteService\Api.IntegrationTests\Api.IntegrationTests.csproj", "{DC31D5D5-4597-47BB-8BDE-9614305CD2F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Api.IntegrationTests", "RemoteService\Api.IntegrationTests\RemoteService.Api.IntegrationTests.csproj", "{DC31D5D5-4597-47BB-8BDE-9614305CD2F5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "RemoteService\DataAccess\DataAccess.csproj", "{287DE3F3-3D6B-44F8-99F4-FA72EAFF416D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.DataAccess", "RemoteService\DataAccess\RemoteService.DataAccess.csproj", "{287DE3F3-3D6B-44F8-99F4-FA72EAFF416D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.UnitTests", "RemoteService\DataAccess.UnitTests\DataAccess.UnitTests.csproj", "{E10A2FBE-7F1A-454B-AC9D-1D6446C32D16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.DataAccess.UnitTests", "RemoteService\DataAccess.UnitTests\RemoteService.DataAccess.UnitTests.csproj", "{E10A2FBE-7F1A-454B-AC9D-1D6446C32D16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -382,7 +382,6 @@ Global
 		{29E9C41D-4F57-431C-B557-6E54F5D6766D} = {F563B1A2-1ED5-410D-B0F9-2F370BB17925}
 		{E82885BF-A6A6-4F84-ABA8-1ED233ED926C} = {96F895FF-813E-469F-834D-3249281F8C6B}
 		{6BD90C13-2D5D-4967-807B-00924980BE2F} = {96F895FF-813E-469F-834D-3249281F8C6B}
-		{689B3678-F62A-4A30-8F4A-CF4DE2618993} = {9B57B696-FF77-4C0D-9555-44315BF0D990}
 		{360B25E2-AEFC-4BFA-9109-F66059BD232C} = {689B3678-F62A-4A30-8F4A-CF4DE2618993}
 		{AFDEAF31-78E5-46E2-9D91-6B834F1EE097} = {689B3678-F62A-4A30-8F4A-CF4DE2618993}
 		{39736E39-DED3-4260-8455-F2269AFCB2EC} = {689B3678-F62A-4A30-8F4A-CF4DE2618993}

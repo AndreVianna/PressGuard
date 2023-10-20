@@ -1,9 +1,9 @@
-﻿using DataAccess.Repositories;
-using DataAccess.Repositories.Auth;
-using DataAccess.Repositories.Settings;
-using DataAccess.Repositories.Systems;
+﻿using RemoteService.Repositories;
+using RemoteService.Repositories.Auth;
+using RemoteService.Repositories.Settings;
+using RemoteService.Repositories.Systems;
 
-namespace DataAccess.Extensions;
+namespace RemoteService.Extensions;
 
 public static class ServiceCollectionExtensions {
     public static IServiceCollection AddRepositories(this IServiceCollection services) {

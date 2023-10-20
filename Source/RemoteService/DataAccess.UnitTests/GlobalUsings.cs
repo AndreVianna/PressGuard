@@ -13,9 +13,6 @@ global using Microsoft.Extensions.Logging.Abstractions;
 global using NSubstitute;
 global using NSubstitute.ExceptionExtensions;
 
-global using DataAccess.Identity;
-global using DataAccess.Repositories.Auth;
-
 global using RemoteService.Handlers.Auth;
 global using RemoteService.Handlers.Setting;
 global using RemoteService.Models;

@@ -31,12 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\DataAccess\RemoteService.DataAccess.csproj" />
+    <ProjectReference Include="..\Domain\RemoteService.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Api.UnitTests" />
+    <InternalsVisibleTo Include="RemoteService.Api.UnitTests" />
   </ItemGroup>
 
   <ItemGroup>
