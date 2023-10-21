@@ -1,4 +1,6 @@
-﻿namespace RemoteService.Handlers.Auth;
+﻿using System.Text;
+
+namespace RemoteService.Authentication;
 
 public class TokenGenerator : ITokenGenerator {
     private readonly DateTimeProvider _dateTime;
@@ -11,7 +13,7 @@ public class TokenGenerator : ITokenGenerator {
 
     public string GenerateSignInToken(User user) {
         var claims = GenerateSignInClaims(user);
-        var expiration = _dateTime.Now.AddHours(_authSettings.SignInTokenExpirationInHours);
+        var expiration = TimeSpan.FromHours(_authSettings.SignInTokenExpirationInHours);
         return GenerateToken(claims, expiration);
     }
 
@@ -19,7 +21,7 @@ public class TokenGenerator : ITokenGenerator {
         var claims = new List<Claim> {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
         };
-        var expiration = _dateTime.Now.AddMinutes(_authSettings.EmailTokenExpirationInMinutes);
+        var expiration = TimeSpan.FromMinutes(_authSettings.EmailTokenExpirationInMinutes);
         return GenerateToken(claims, expiration);
     }
 
@@ -29,28 +31,29 @@ public class TokenGenerator : ITokenGenerator {
             new(ClaimTypes.Email, user.Email),
         };
         if (user.FirstName is not null)
-            claims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
+            claims.Add(new(ClaimTypes.GivenName, user.FirstName));
         claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.ToString())));
         return claims;
     }
 
-    private string GenerateToken(IEnumerable<Claim> claims, DateTime expiration) {
+    private string GenerateToken(IEnumerable<Claim> claims, TimeSpan duration) {
         var credentials = GetCredentials();
 
-        var tokenDescriptor = new SecurityTokenDescriptor {
-            Subject = new ClaimsIdentity(claims),
-            Expires = expiration,
-            SigningCredentials = credentials
-        };
-
+        var now = _dateTime.UtcNow;
+        var expiration = now + duration;
+        var token = new JwtSecurityToken(null,
+                                         null,
+                                         claims,
+                                         now,
+                                         expiration,
+                                         credentials);
         var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
 
     private SigningCredentials GetCredentials() {
         var issuerSigningKey = Ensure.IsNotNullOrWhiteSpace(_authSettings.IssuerSigningKey);
-        var key = new SymmetricSecurityKey(Base64UrlEncoder.DecodeBytes(issuerSigningKey));
-        return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(issuerSigningKey));
+        return new(key, SecurityAlgorithms.HmacSha256);
     }
 }

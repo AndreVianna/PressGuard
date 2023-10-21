@@ -31,7 +31,7 @@ public class ValidatableAttributeTests {
 
     [Fact]
     public void Validate_WithInvalidConstraint_ThrowsArgumentException() {
-        _definition.Constraints.Add(new AttributeConstraint("Invalid"));
+        _definition.Constraints.Add(new("Invalid"));
 
         _attribute.Invoking(x => x.Validate()).Should().Throw<InvalidOperationException>();
     }

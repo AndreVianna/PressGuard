@@ -1,4 +1,4 @@
-﻿namespace RemoteService.Handlers.Auth;
+﻿namespace RemoteService.Authentication;
 
 public record AuthSettings {
     public required bool Requires2Factor { get; set; }

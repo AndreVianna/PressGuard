@@ -5,7 +5,7 @@ public class ObjectValidator : Validator<object?>, IObjectValidator {
 
     public ObjectValidator(object? subject, string source, ValidatorMode mode = ValidatorMode.And)
         : base(subject, source, mode) {
-        Connector = new Connector<object?, ObjectValidator>(this);
+        Connector = new(this);
         _commandFactory = ValidationCommandFactory.For(typeof(int?), Source);
     }
 

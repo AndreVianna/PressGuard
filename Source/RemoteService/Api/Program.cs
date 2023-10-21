@@ -1,5 +1,3 @@
-using RemoteService.Identity;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var env = builder.Environment;
@@ -36,7 +34,7 @@ builder.Services.AddSystemUtilities();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUserAccessor, ApiUserAccessor>();
 builder.Services.AddScoped<IHasher, Hasher>();
-builder.Services.AddDomainHandlers(builder.Configuration);
+builder.Services.AddDomainHandlers<TokenGenerator>(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddScoped(sp => new CustomExceptionFilter(sp.GetRequiredService<ILoggerFactory>(), env));
 
@@ -48,12 +46,12 @@ const string apiTitle = "RemoteService.API";
 const string apiVersion = "v1";
 const string authHeaderKey = "Authorization";
 builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc(apiVersion, new OpenApiInfo { Title = apiTitle, Version = apiVersion });
+    c.SwaggerDoc(apiVersion, new() { Title = apiTitle, Version = apiVersion });
 
     c.OperationFilter<AuthResponsesOperationFilter>();
-    c.AddSecurityDefinition(authScheme, new OpenApiSecurityScheme {
+    c.AddSecurityDefinition(authScheme, new() {
         Description = "Please enter a valid JWT token.",
-        Reference = new OpenApiReference {
+        Reference = new() {
             Type = ReferenceType.SecurityScheme,
             Id = authScheme,
         },
@@ -64,7 +62,7 @@ builder.Services.AddSwaggerGen(c => {
         BearerFormat = "JWT",
     });
 
-    c.DocInclusionPredicate((name, api) => true);
+    c.DocInclusionPredicate((_, _) => true);
     c.TagActionsBy(api => new[] { api.GroupName });
     c.EnableAnnotations();
 });

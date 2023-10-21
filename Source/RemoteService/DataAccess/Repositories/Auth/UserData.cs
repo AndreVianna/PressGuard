@@ -1,4 +1,6 @@
-﻿namespace RemoteService.Repositories.Auth;
+﻿using RemoteService.Authentication;
+
+namespace RemoteService.Repositories.Auth;
 
 public record UserData : IPersisted {
     public Guid Id { get; init; }

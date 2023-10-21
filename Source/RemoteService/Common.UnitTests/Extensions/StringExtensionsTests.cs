@@ -50,4 +50,40 @@ public class StringExtensionsTests {
         // Assert
         result.Should().Be(expectedResult);
     }
+
+    [Fact]
+    public void IsRequired_ReturnsConnector() {
+        // Arrange
+        var subject = "42.0m";
+
+        // Act
+        var result = subject.IsRequired();
+
+        // Assert
+        result.Should().BeOfType<Connector<string?, StringValidator>>();
+    }
+
+    [Fact]
+    public void IsRequired_ForNullable_ReturnsConnector() {
+        // Arrange
+        string? subject = default;
+
+        // Act
+        var result = subject.IsRequired();
+
+        // Assert
+        result.Should().BeOfType<Connector<string?, StringValidator>>();
+    }
+
+    [Fact]
+    public void IsOptional_ForNullable_ReturnsConnector() {
+        // Arrange
+        string? subject = default;
+
+        // Act
+        var result = subject.IsOptional();
+
+        // Assert
+        result.Should().BeOfType<Connector<string?, StringValidator>>();
+    }
 }

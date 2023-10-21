@@ -15,6 +15,6 @@ public class Hasher : IHasher {
             _hashAlgorithm,
             _keySize);
 
-        return new HashedSecret(hashBytes, saltBytes);
+        return new(hashBytes, saltBytes);
     }
 }

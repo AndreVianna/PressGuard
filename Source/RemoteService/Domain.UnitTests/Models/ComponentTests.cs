@@ -19,7 +19,7 @@ public class ComponentTests {
             },
             Attributes = new[] {
                 new TextAttribute {
-                    Definition = new AttributeDefinition {
+                    Definition = new() {
                         DataType = typeof(string),
                         Name = "TestAttribute",
                         Description = "Test attribute.",

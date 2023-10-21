@@ -19,10 +19,10 @@ public record RegisterRequest
     [MinLength(Validation.Name.MinimumLength)]
     [MaxLength(Validation.Name.MaximumLength)]
     [SwaggerSchema("The name of the user.")]
-    public string? FirstName { get; init; }
+    public required string FirstName { get; init; }
 
     [MinLength(Validation.Name.MinimumLength)]
     [MaxLength(Validation.Name.MaximumLength)]
     [SwaggerSchema("The first name (given name) of the user.")]
-    public string? LastName { get; init; }
+    public required string LastName { get; init; }
 }

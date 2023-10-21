@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Options;
 
+using RemoteService.Authentication;
+using RemoteService.Communication;
 using RemoteService.Repositories.User;
 
 namespace RemoteService.Handlers.Auth;
@@ -49,7 +51,7 @@ public class AuthHandlerTests {
         var options = Substitute.For<IOptions<AuthSettings>>();
         options.Value.Returns(authSettings);
 
-        _handler = new AuthHandler(_repository, _hasher, options, _emailSender, _tokenGenerator, NullLogger<AuthHandler>.Instance);
+        _handler = new(_repository, _hasher, options, _emailSender, _tokenGenerator, NullLogger<AuthHandler>.Instance);
     }
 
     private class TestLoginData : TheoryData<SignIn, bool, string[]> {

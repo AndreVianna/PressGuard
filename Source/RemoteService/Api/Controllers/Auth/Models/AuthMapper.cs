@@ -9,8 +9,8 @@ internal static class AuthMapper {
 
     public static SignOn ToDomain(this RegisterRequest request)
         => new() {
-            FirstName = request.FirstName?.Trim(),
-            LastName = request.LastName?.Trim(),
+            FirstName = request.FirstName.Trim(),
+            LastName = request.LastName.Trim(),
             Email = request.Email.Trim(),
             Password = request.Password.Trim(),
         };

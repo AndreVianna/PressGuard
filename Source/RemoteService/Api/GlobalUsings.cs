@@ -22,8 +22,10 @@ global using Microsoft.Extensions.Options;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.OpenApi.Models;
 
+global using RemoteService.Authentication;
 global using RemoteService.Handlers.Auth;
 global using RemoteService.Extensions;
+global using RemoteService.Identity;
 global using RemoteService.Utilities;
 
 global using Serilog;

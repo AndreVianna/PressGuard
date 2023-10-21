@@ -1,4 +1,5 @@
-﻿using RemoteService.Controllers.Users;
+﻿using RemoteService.Authentication;
+using RemoteService.Controllers.Users;
 using RemoteService.Controllers.Users.Models;
 using RemoteService.Handlers.Auth;
 
@@ -33,7 +34,7 @@ public class UsersControllerTests {
     private readonly UsersController _controller;
 
     public UsersControllerTests() {
-        _controller = new UsersController(_handler, new(), _logger);
+        _controller = new(_handler, new(), _logger);
     }
 
     [Fact]

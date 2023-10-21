@@ -40,28 +40,28 @@ public class ListAttributeTests {
     [Theory]
     [ClassData(typeof(TestData))]
     public void Validate_WithValidConstraint_ReturnsTrue(string validator, object[] arguments, bool expectedResult) {
-        _definition.Constraints.Add(new AttributeConstraint(validator, arguments));
+        _definition.Constraints.Add(new(validator, arguments));
 
         _attribute.Validate().IsSuccess.Should().Be(expectedResult);
     }
 
     [Fact]
     public void Validate_WithInvalidArgument_ThrowsArgumentException() {
-        _definition.Constraints.Add(new AttributeConstraint("Has", "wrong"));
+        _definition.Constraints.Add(new("Has", "wrong"));
 
         _attribute.Invoking(x => x.Validate()).Should().Throw<ArgumentException>();
     }
 
     [Fact]
     public void Validate_WithInvalidNumberOfArguments_ThrowsArgumentException() {
-        _definition.Constraints.Add(new AttributeConstraint("Has"));
+        _definition.Constraints.Add(new("Has"));
 
         _attribute.Invoking(x => x.Validate()).Should().Throw<ArgumentException>();
     }
 
     [Fact]
     public void Validate_WithInvalidConstraint_ThrowsArgumentException() {
-        _definition.Constraints.Add(new AttributeConstraint("Invalid"));
+        _definition.Constraints.Add(new("Invalid"));
 
         _attribute.Invoking(x => x.Validate()).Should().Throw<InvalidOperationException>();
     }

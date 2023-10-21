@@ -100,11 +100,11 @@ public sealed class TrackedJsonFileRepositoryTests : IDisposable {
         _io.GetFilesFrom(_finalFolder, $"+{_invalidTimestampId}*.json", SearchOption.TopDirectoryOnly).Returns(new[] { _invalidTimestampFile });
         _io.GetFilesFrom(_finalFolder, $"+{_invalidContentId}*.json", SearchOption.TopDirectoryOnly).Returns(new[] { _invalidContentFile });
 
-        _file1Content = new MemoryStream(Encoding.UTF8.GetBytes(Serialize(_expected[0])));
+        _file1Content = new(Encoding.UTF8.GetBytes(Serialize(_expected[0])));
         _io.OpenFileForReading(_file1V3).Returns(_file1Content);
-        _file2Content = new MemoryStream(Encoding.UTF8.GetBytes(Serialize(_expected[1])));
+        _file2Content = new(Encoding.UTF8.GetBytes(Serialize(_expected[1])));
         _io.OpenFileForReading(_file2V0).Returns(_file2Content);
-        _invalidFileContent = new MemoryStream("AsInvalidFor"u8.ToArray());
+        _invalidFileContent = new("AsInvalidFor"u8.ToArray());
         _io.OpenFileForReading(_invalidContentFile).Returns(_invalidFileContent);
 
         _io.GetFileNameFrom(_newFile).Returns(_newFileName);

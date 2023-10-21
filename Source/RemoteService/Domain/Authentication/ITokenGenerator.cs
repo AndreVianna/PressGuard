@@ -1,4 +1,4 @@
-﻿namespace RemoteService.Handlers.Auth;
+﻿namespace RemoteService.Authentication;
 
 public interface ITokenGenerator {
     string GenerateSignInToken(User user);

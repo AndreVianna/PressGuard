@@ -1,6 +1,7 @@
-﻿using RemoteService.Models.Abstractions;
+﻿using RemoteService.Handlers.Auth;
+using RemoteService.Models.Abstractions;
 
-namespace RemoteService.Handlers.Auth;
+namespace RemoteService.Authentication;
 
 public record User : IValidatable, IPersisted {
     public required Guid Id { get; init; }

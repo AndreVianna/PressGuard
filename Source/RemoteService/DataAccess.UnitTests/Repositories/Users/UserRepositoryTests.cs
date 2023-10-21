@@ -1,5 +1,3 @@
-using RemoteService.Repositories.Auth;
-
 namespace RemoteService.Repositories.Users;
 
 public class UserRepositoryTests {
@@ -101,7 +99,7 @@ public class UserRepositoryTests {
         var newUser1 = new UserData {
             Id = Guid.Parse("e3ade862-addf-4628-88f5-ed0938ca91c9"),
             Email = "new.user@email.com",
-            HashedPassword = new HashedSecret("NewHashedPassword="u8.ToArray(), "SomeSalt"u8.ToArray()),
+            HashedPassword = new("NewHashedPassword="u8.ToArray(), "SomeSalt"u8.ToArray()),
             FirstName = "New",
             LastName = "User",
             Birthday = DateOnly.FromDateTime(DateTime.Today.AddYears(-30)),

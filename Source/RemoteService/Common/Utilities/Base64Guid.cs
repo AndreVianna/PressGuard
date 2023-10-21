@@ -38,7 +38,7 @@ public partial record struct Base64Guid(Guid Value) {
             return Guid.Empty;
         var text = Ensure.IsNotNullOrWhiteSpace(input).Trim();
         if (!_base64CGuidFormat.IsMatch(text))
-            return new Guid(input);
+            return new(input);
 
         text = text
               .Replace('.', '/')
@@ -46,7 +46,7 @@ public partial record struct Base64Guid(Guid Value) {
              + "==";
 
         var buffer = Convert.FromBase64String(text);
-        return new Guid(buffer);
+        return new(buffer);
     }
 
     [GeneratedRegex("^[a-zA-Z0-9\\-\\.]{22}$", RegexOptions.Compiled)]
