@@ -1,10 +1,7 @@
-﻿using RemoteService.Models;
-using RemoteService.Models.Abstractions;
-
-namespace RemoteService.Handlers;
+﻿namespace RemoteService.Handlers;
 
 public interface ICrudHandler<TModel, TRowModel>
-    where TModel : class, IPersisted, IValidatable
+    where TModel : Persisted, IValidatable
     where TRowModel : Row {
     Task<CrudResult<IEnumerable<TRowModel>>> GetManyAsync(CancellationToken ct = default);
     Task<CrudResult<TModel>> GetByIdAsync(Guid id, CancellationToken ct = default);

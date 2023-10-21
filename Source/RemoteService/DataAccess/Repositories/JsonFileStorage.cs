@@ -163,9 +163,8 @@ public partial class JsonFileStorage<TData> : IJsonFileStorage<TData>
         var fileName = _io.GetFileNameFrom(filePathWithName);
         dateTime = _dateTime.Default;
         var match = FileNameMatcher().Match(fileName);
-        if (!match.Success) return false;
-        if (!_dateTime.TryParseExact(match.Groups["datetime"].Value, _timestampFormat, null, DateTimeStyles.None, out dateTime)) return false;
-        return true;
+        return match.Success
+            && _dateTime.TryParseExact(match.Groups["datetime"].Value, _timestampFormat, null, DateTimeStyles.None, out dateTime);
     }
 
     private string? GetActiveFile(Guid id)

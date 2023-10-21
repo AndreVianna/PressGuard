@@ -132,11 +132,11 @@ public class SystemRepositoryTests {
             Description = "Some Description",
             Tags = new[] { "SomeTag" },
             Domains = new[] {
-                new Base {
+                new PersistedBase {
                     Name = "Dom1",
                     Description = "SomeDescription",
                 },
-                new Base {
+                new PersistedBase {
                     Name = "Domain1",
                     ShortName = "Dom2",
                     Description = "SomeDescription",

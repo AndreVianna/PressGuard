@@ -1,7 +1,4 @@
-﻿using RemoteService.Authentication;
-using RemoteService.Handlers.Auth;
-
-using UserModel = RemoteService.Authentication.User;
+﻿using UserModel = RemoteService.Authentication.User;
 
 namespace RemoteService.Repositories.User;
 

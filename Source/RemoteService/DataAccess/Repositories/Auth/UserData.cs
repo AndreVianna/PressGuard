@@ -2,8 +2,7 @@
 
 namespace RemoteService.Repositories.Auth;
 
-public record UserData : IPersisted {
-    public Guid Id { get; init; }
+public record UserData : Persisted {
     public required string Email { get; init; }
     public HashedSecret? HashedPassword { get; init; }
     public DateTime LockExpiration { get; init; } = DateTime.MinValue;
@@ -14,6 +13,4 @@ public record UserData : IPersisted {
     public string? FirstName { get; init; }
     public string? LastName { get; init; }
     public DateOnly? Birthday { get; init; }
-
-    public DateTime ChangeStamp { get; init; }
 }

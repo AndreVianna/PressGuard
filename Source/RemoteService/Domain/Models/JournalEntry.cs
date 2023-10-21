@@ -1,6 +1,4 @@
-﻿using RemoteService.Models.Abstractions;
-
-namespace RemoteService.Models;
+﻿namespace RemoteService.Models;
 
 public record JournalEntry : IJournalEntry {
     public required string Section { get; init; }

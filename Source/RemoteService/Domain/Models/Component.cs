@@ -1,7 +1,5 @@
-﻿using RemoteService.Models.Abstractions;
+﻿namespace RemoteService.Models;
 
-namespace RemoteService.Models;
-
-public abstract record Component : Persisted {
+public abstract record Component : PersistedBase {
     public ICollection<IAttribute> Attributes { get; init; } = new List<IAttribute>();
 }

@@ -1,16 +1,11 @@
-﻿using RemoteService.Repositories;
-using RemoteService.Repositories.Auth;
-using RemoteService.Repositories.Settings;
-using RemoteService.Repositories.Systems;
-
-namespace RemoteService.Extensions;
+﻿namespace RemoteService.Extensions;
 
 public static class ServiceCollectionExtensions {
     public static IServiceCollection AddRepositories(this IServiceCollection services) {
-        services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<ISystemRepository, SystemRepository>();
-        services.AddScoped<ISettingRepository, SettingRepository>();
-        services.AddScoped(typeof(IJsonFileStorage<>), typeof(JsonFileStorage<>));
+        services.TryAddScoped(typeof(IJsonFileStorage<>), typeof(JsonFileStorage<>));
+        services.TryAddScoped<IUserRepository, UserRepository>();
+        services.TryAddScoped<ISystemRepository, SystemRepository>();
+        services.TryAddScoped<ISettingRepository, SettingRepository>();
         return services;
     }
 }

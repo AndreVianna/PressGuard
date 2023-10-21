@@ -1,7 +1,5 @@
-﻿using RemoteService.Models;
+﻿namespace RemoteService.Handlers.System;
 
-namespace RemoteService.Handlers.System;
-
-public record System : Persisted {
-    public ICollection<Base> Domains { get; init; } = new List<Base>();
+public record System : PersistedBase {
+    public ICollection<PersistedBase> Domains { get; init; } = new List<PersistedBase>();
 }

@@ -1,6 +1,4 @@
-﻿using RemoteService.Models.Abstractions;
-
-namespace RemoteService.Models.Attributes;
+﻿namespace RemoteService.Models.Attributes;
 
 public record AttributeDefinition : Base, IAttributeDefinition {
     public required Type DataType { get; init; }

@@ -9,6 +9,7 @@ global using System.Utilities;
 
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
 
@@ -19,6 +20,9 @@ global using RemoteService.Handlers.System;
 global using RemoteService.Models;
 global using RemoteService.Models.Abstractions;
 global using RemoteService.Models.Attributes;
+global using RemoteService.Repositories.Auth;
 global using RemoteService.Repositories.Setting;
+global using RemoteService.Repositories.Settings;
 global using RemoteService.Repositories.System;
+global using RemoteService.Repositories.Systems;
 global using RemoteService.Repositories.User;

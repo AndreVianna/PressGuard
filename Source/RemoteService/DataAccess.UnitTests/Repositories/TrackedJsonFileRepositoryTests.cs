@@ -4,7 +4,7 @@ public sealed class TrackedJsonFileRepositoryTests : IDisposable {
     private readonly FileSystemAccessor _io;
     private readonly JsonFileStorage<TestData> _storage;
 
-    private record TestData : Persisted {
+    private record TestData : PersistedBase {
         public TestData() {
             Id = Guid.NewGuid();
         }

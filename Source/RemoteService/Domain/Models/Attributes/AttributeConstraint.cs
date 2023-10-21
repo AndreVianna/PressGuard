@@ -1,8 +1,6 @@
 ﻿using System.Validation.Commands;
 using System.Validation.Commands.Abstractions;
 
-using RemoteService.Models.Abstractions;
-
 namespace RemoteService.Models.Attributes;
 
 public sealed record AttributeConstraint : IAttributeConstraint {

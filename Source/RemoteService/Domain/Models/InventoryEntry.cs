@@ -1,6 +1,4 @@
-﻿using RemoteService.Models.Abstractions;
-
-namespace RemoteService.Models;
+﻿namespace RemoteService.Models;
 
 public record InventoryEntry : IInventoryEntry {
     public required IGameObject Item { get; init; }

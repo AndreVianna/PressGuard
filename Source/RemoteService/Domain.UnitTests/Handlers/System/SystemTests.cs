@@ -8,7 +8,7 @@ public class SystemTests {
         var system = new System {
             Name = "TestName",
             Description = "TestDescription",
-            Domains = new List<Base> {
+            Domains = new List<PersistedBase> {
                 new() {
                     Name = "TestDomainName",
                     Description = "TestDomainDescription",

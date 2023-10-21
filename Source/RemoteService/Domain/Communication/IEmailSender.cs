@@ -1,7 +1,5 @@
-﻿using RemoteService.Authentication;
-
-namespace RemoteService.Communication;
+﻿namespace RemoteService.Communication;
 
 public interface IEmailSender {
-    Task SendEmailConfirmationMessage(User user, CancellationToken ct);
+    Task SendEmailConfirmationMessage(User user, CancellationToken ct = default);
 }

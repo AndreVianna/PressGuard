@@ -42,6 +42,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Security", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Security.UnitTests", "Security.UnitTests\RemoteService.Security.UnitTests.csproj", "{3BA7ECB1-1B4B-40EF-804B-110A75116B02}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.EmailSender", "EmailSender\RemoteService.EmailSender.csproj", "{3CEFE49D-807C-4AF1-BA4A-FCFF532783A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.EmailSender.UnitTests", "EmailSender.UnitTests\RemoteService.EmailSender.UnitTests.csproj", "{AD43EEA1-CE81-4C56-A959-B2E477C23A27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +100,14 @@ Global
 		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CEFE49D-807C-4AF1-BA4A-FCFF532783A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CEFE49D-807C-4AF1-BA4A-FCFF532783A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CEFE49D-807C-4AF1-BA4A-FCFF532783A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CEFE49D-807C-4AF1-BA4A-FCFF532783A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD43EEA1-CE81-4C56-A959-B2E477C23A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD43EEA1-CE81-4C56-A959-B2E477C23A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD43EEA1-CE81-4C56-A959-B2E477C23A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD43EEA1-CE81-4C56-A959-B2E477C23A27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +125,8 @@ Global
 		{A03DC235-3605-4E2C-8C44-EA221BAD28C0} = {8EAB654F-A69C-4FA6-A799-8ACD03115B07}
 		{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C} = {229A2D37-7A5B-4653-889A-8A88380088A4}
 		{3BA7ECB1-1B4B-40EF-804B-110A75116B02} = {229A2D37-7A5B-4653-889A-8A88380088A4}
+		{3CEFE49D-807C-4AF1-BA4A-FCFF532783A7} = {229A2D37-7A5B-4653-889A-8A88380088A4}
+		{AD43EEA1-CE81-4C56-A959-B2E477C23A27} = {229A2D37-7A5B-4653-889A-8A88380088A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85AA8CFD-0F07-4E2A-9BCB-6D035862320C}

@@ -1,6 +1,4 @@
-﻿using RemoteService.Models.Abstractions;
-
-namespace RemoteService.Models.Attributes;
+﻿namespace RemoteService.Models.Attributes;
 
 public abstract record Attribute<TValue> : IAttribute {
     public required AttributeDefinition Definition { get; init; }

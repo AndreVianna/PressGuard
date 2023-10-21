@@ -1,6 +1,4 @@
-﻿using RemoteService.Authentication;
-
-namespace RemoteService.Handlers.Auth;
+﻿namespace RemoteService.Handlers.Auth;
 
 public interface IAuthHandler : ICrudHandler<User, UserRow> {
     Task<SignInResult> SignInAsync(SignIn signIn, CancellationToken cancellation = default);

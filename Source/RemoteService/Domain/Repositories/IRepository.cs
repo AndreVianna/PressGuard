@@ -1,7 +1,4 @@
-﻿using RemoteService.Models;
-using RemoteService.Models.Abstractions;
-
-namespace RemoteService.Repositories;
+﻿namespace RemoteService.Repositories;
 
 public interface IRepository<TModel, TRowModel>
     where TModel : class, IPersisted

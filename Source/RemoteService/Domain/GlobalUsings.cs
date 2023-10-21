@@ -11,6 +11,15 @@ global using System.Validation;
 
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Options;
 global using Microsoft.IdentityModel.Tokens;
+
+global using RemoteService.Authentication;
+global using RemoteService.Handlers.Auth;
+global using RemoteService.Handlers.Setting;
+global using RemoteService.Handlers.System;
+global using RemoteService.Models;
+global using RemoteService.Models.Abstractions;
+global using RemoteService.Models.Attributes;
