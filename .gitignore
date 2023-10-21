@@ -233,6 +233,8 @@ _pkginfo.txt
 ClientBin/
 ~$*
 *~
+*.orig
+*.bak
 *.dbmdl
 *.dbproj.schemaview
 *.jfm
