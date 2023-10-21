@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Solution Items", "0 Solut
 		..\..\.github\workflows\remote_service.yml = ..\..\.github\workflows\remote_service.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Security", "Security\RemoteService.Security.csproj", "{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoteService.Security.UnitTests", "Security.UnitTests\RemoteService.Security.UnitTests.csproj", "{3BA7ECB1-1B4B-40EF-804B-110A75116B02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +88,14 @@ Global
 		{A03DC235-3605-4E2C-8C44-EA221BAD28C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A03DC235-3605-4E2C-8C44-EA221BAD28C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A03DC235-3605-4E2C-8C44-EA221BAD28C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA7ECB1-1B4B-40EF-804B-110A75116B02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +111,8 @@ Global
 		{873F6165-9240-4A27-8CB2-157B276E6B39} = {8EAB654F-A69C-4FA6-A799-8ACD03115B07}
 		{367E1D9B-61C6-4BF5-AFB4-1C7D300DE6AA} = {8EAB654F-A69C-4FA6-A799-8ACD03115B07}
 		{A03DC235-3605-4E2C-8C44-EA221BAD28C0} = {8EAB654F-A69C-4FA6-A799-8ACD03115B07}
+		{C015BC6E-E90E-49B0-B2E3-1C8CFB1FD15C} = {229A2D37-7A5B-4653-889A-8A88380088A4}
+		{3BA7ECB1-1B4B-40EF-804B-110A75116B02} = {229A2D37-7A5B-4653-889A-8A88380088A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85AA8CFD-0F07-4E2A-9BCB-6D035862320C}

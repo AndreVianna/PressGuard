@@ -1,4 +1,4 @@
-﻿namespace RemoteService.Handlers.Auth;
+﻿namespace RemoteService.Authentication;
 
 public enum Role {
     User = 1,

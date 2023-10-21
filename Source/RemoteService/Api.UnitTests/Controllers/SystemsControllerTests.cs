@@ -30,7 +30,7 @@ public class SystemsControllerTests {
     private readonly SystemsController _controller;
 
     public SystemsControllerTests() {
-        _controller = new SystemsController(_handler, _logger);
+        _controller = new(_handler, _logger);
     }
 
     [Fact]

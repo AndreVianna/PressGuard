@@ -1,8 +1,8 @@
 using RemoteService.Constants;
 
-namespace RemoteService.Handlers.Auth;
+namespace RemoteService.Authentication;
 
-public class LoginTests {
+public class SignInTests {
     [Fact]
     public void Constructor_CreatesInstance() {
         var login = new SignIn {

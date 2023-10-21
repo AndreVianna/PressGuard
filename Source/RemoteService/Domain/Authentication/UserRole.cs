@@ -1,4 +1,4 @@
-﻿namespace RemoteService.Handlers.Auth;
+﻿namespace RemoteService.Authentication;
 
 public class UserRole {
     public Guid UserId { get; set; }

@@ -13,11 +13,14 @@ global using Microsoft.Extensions.Logging.Abstractions;
 global using NSubstitute;
 global using NSubstitute.ExceptionExtensions;
 
+global using RemoteService.Authentication;
 global using RemoteService.Handlers.Auth;
 global using RemoteService.Handlers.Setting;
+global using RemoteService.Identity;
 global using RemoteService.Models;
 global using RemoteService.Models.Abstractions;
 global using RemoteService.Models.Attributes;
+global using RemoteService.Repositories.Auth;
 
 global using Xunit;
 

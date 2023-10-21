@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\RemoteService.DataAccess.csproj" />
     <ProjectReference Include="..\Domain\RemoteService.Domain.csproj" />
+    <ProjectReference Include="..\Security\RemoteService.Security.csproj" />
   </ItemGroup>
 
   <ItemGroup>

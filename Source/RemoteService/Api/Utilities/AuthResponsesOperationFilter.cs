@@ -16,7 +16,7 @@ public class AuthResponsesOperationFilter : IOperationFilter {
         var securityRequirement = new OpenApiSecurityRequirement { {
             new OpenApiSecurityScheme {
                 Description = "Please enter a valid JWT token.",
-                Reference = new OpenApiReference {
+                Reference = new() {
                     Type = ReferenceType.SecurityScheme,
                     Id = _authScheme,
                 },
@@ -29,6 +29,6 @@ public class AuthResponsesOperationFilter : IOperationFilter {
             new List<string>()
         }};
         operation.Security = new List<OpenApiSecurityRequirement> { securityRequirement };
-        operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+        operation.Responses.Add("401", new() { Description = "Unauthorized" });
     }
 }

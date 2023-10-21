@@ -1,4 +1,5 @@
-﻿using RemoteService.Controllers.Auth;
+﻿using RemoteService.Authentication;
+using RemoteService.Controllers.Auth;
 using RemoteService.Controllers.Auth.Models;
 using RemoteService.Handlers.Auth;
 
@@ -22,7 +23,7 @@ public class AuthControllerTests {
     private readonly AuthController _controller;
 
     public AuthControllerTests() {
-        _controller = new AuthController(_handler, _logger);
+        _controller = new(_handler, _logger);
     }
 
     [Fact]

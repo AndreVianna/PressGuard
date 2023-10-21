@@ -15,7 +15,7 @@ internal class ApiKeyAuthenticationHandler : AuthenticationHandler<Authenticatio
         : base(options, loggerFactory, encoder, clock) {
         _logger = loggerFactory.CreateLogger<ApiKeyAuthenticationHandler>();
         _issuerSigningKey = Encoding.ASCII.GetBytes(Ensure.IsNotNullOrWhiteSpace(configuration["Security:IssuerSigningKey"], "Configuration[Security:IssuerSigningKey]"));
-        _tokenHandler = new JwtSecurityTokenHandler();
+        _tokenHandler = new();
     }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync() {
@@ -69,7 +69,7 @@ internal class ApiKeyAuthenticationHandler : AuthenticationHandler<Authenticatio
 
     private void SetAuthenticatedUser(IPrincipal claims) {
         var identity = new ClaimsIdentity(claims.Identity);
-        Context.User = new ClaimsPrincipal(identity);
+        Context.User = new(identity);
     }
 
     private static bool UserHasAtLeastOneOfTheAllowedRoles(Endpoint endpoint, ClaimsPrincipal claims) {

@@ -1,5 +1,3 @@
-using RemoteService.Identity;
-
 namespace RemoteService.Repositories.Settings;
 
 public class SettingRepositoryTests {

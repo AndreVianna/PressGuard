@@ -1,4 +1,4 @@
-﻿namespace RemoteService.Handlers.Auth;
+﻿namespace RemoteService.Authentication;
 
 public record SignOn : IValidatable {
     public string? FirstName { get; init; }
