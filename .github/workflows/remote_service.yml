@@ -1,6 +1,7 @@
-name: .NET (Remote Service API)
+name: Remote Service API (.NET)
 
 on:
+  workflow_dispatch: {}
   push:
     branches: [ "dev,main" ]
   pull_request:
