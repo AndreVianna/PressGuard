@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0D33CA40-25AA-4581-B299-D21C942884A6}</ProjectGuid>
+    <ProjectGuid>{290e227d-8542-4b05-bcb8-2cfa3a1dfc42}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>DeviceController2</RootNamespace>
+    <RootNamespace>DeviceController_Domain</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
@@ -31,8 +31,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -42,46 +40,24 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared">
-    <Import Project="..\ControllerDomain\ControllerDomain.vcxitems" Label="Shared" />
-  </ImportGroup>
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <IncludePath>/usr/local/include;/usr/include</IncludePath>
-    <LibraryPath>/usr/local/lib;/usr/lib</LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
-    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <IncludePath>/usr/local/include;/usr/include</IncludePath>
-    <LibraryPath>/usr/local/lib;/usr/lib</LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
-    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>
-      </LibraryDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lpigpio;-lpigpiod_if;-lpigpiod_if2</AdditionalDependencies>
+      <LibraryDependencies>wiringPi</LibraryDependencies>
     </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
-    <ClCompile>
-      <CppLanguageStandard>c++17</CppLanguageStandard>
-    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Link>
-      <LibraryDependencies>pigpio</LibraryDependencies>
+      <LibraryDependencies>wiringPi</LibraryDependencies>
     </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
@@ -89,27 +65,11 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DateTimeProvider.cpp" />
-    <ClCompile Include="DeviceHandler.cpp" />
-    <ClCompile Include="FileDataStore.cpp" />
-    <ClCompile Include="HubConnectionHandler.cpp" />
-    <ClCompile Include="LogHandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Messages.cpp" />
   </ItemGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <ClCompile>
-      <Verbose>false</Verbose>
-      <CppLanguageStandard>c++17</CppLanguageStandard>
-      <CLanguageStandard>c11</CLanguageStandard>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lpigpio;-lpigpiod_if;-lpigpiod_if2</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ShowProgress>false</ShowProgress>
-      <VerboseOutput>false</VerboseOutput>
-    </Link>
-  </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

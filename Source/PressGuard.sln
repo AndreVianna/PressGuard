@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Device Controller", "2 De
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Local Hub", "3 Local Hub", "{F563B1A2-1ED5-410D-B0F9-2F370BB17925}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceController", "DeviceContoller\Controller\DeviceController.vcxproj", "{0D33CA40-25AA-4581-B299-D21C942884A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceController", "DeviceController\Controller\DeviceController.vcxproj", "{0D33CA40-25AA-4581-B299-D21C942884A6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Remote Service", "4 Remote Service", "{9B57B696-FF77-4C0D-9555-44315BF0D990}"
 EndProject
@@ -25,9 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 DataAccess", "2 DataAcces
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "LocalHub.Client", "LocalHub\Client\LocalHub.Client.esproj", "{29E9C41D-4F57-431C-B557-6E54F5D6766D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller.Domain", "DeviceContoller\ControllerDomain\ControllerDomain.vcxitems", "{E82885BF-A6A6-4F84-ABA8-1ED233ED926C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller.Domain", "DeviceController\ControllerDomain\ControllerDomain.vcxitems", "{E82885BF-A6A6-4F84-ABA8-1ED233ED926C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceController.UnitTests", "DeviceContoller\ControllerUnitTests\DeviceController.UnitTests.vcxproj", "{6BD90C13-2D5D-4967-807B-00924980BE2F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceController.UnitTests", "DeviceController\ControllerUnitTests\DeviceController.UnitTests.vcxproj", "{6BD90C13-2D5D-4967-807B-00924980BE2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Common", "1 Common", "{689B3678-F62A-4A30-8F4A-CF4DE2618993}"
 EndProject
@@ -540,8 +540,8 @@ Global
 		SolutionGuid = {E64E3593-77B9-4865-9501-052D221770FC}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		DeviceContoller\ControllerDomain\ControllerDomain.vcxitems*{0d33ca40-25aa-4581-b299-d21c942884a6}*SharedItemsImports = 4
-		DeviceContoller\ControllerDomain\ControllerDomain.vcxitems*{6bd90c13-2d5d-4967-807b-00924980be2f}*SharedItemsImports = 4
-		DeviceContoller\ControllerDomain\ControllerDomain.vcxitems*{e82885bf-a6a6-4f84-aba8-1ed233ed926c}*SharedItemsImports = 9
+		DeviceController\ControllerDomain\ControllerDomain.vcxitems*{0d33ca40-25aa-4581-b299-d21c942884a6}*SharedItemsImports = 4
+		DeviceController\ControllerDomain\ControllerDomain.vcxitems*{6bd90c13-2d5d-4967-807b-00924980be2f}*SharedItemsImports = 4
+		DeviceController\ControllerDomain\ControllerDomain.vcxitems*{e82885bf-a6a6-4f84-aba8-1ed233ed926c}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal

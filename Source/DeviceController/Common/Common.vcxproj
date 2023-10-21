@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6BD90C13-2D5D-4967-807B-00924980BE2F}</ProjectGuid>
+    <ProjectGuid>{04747ddd-8de1-407f-bbe6-f571b4d64e5f}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>DeviceController_UnitTests</RootNamespace>
+    <RootNamespace>Common</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
@@ -31,8 +31,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -42,63 +40,49 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared">
-    <Import Project="..\ControllerDomain\ControllerDomain.vcxitems" Label="Shared" />
-  </ImportGroup>
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <IncludePath>/usr/local/include;/usr/include</IncludePath>
-    <LibraryPath>/usr/local/lib;/usr/lib</LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
+    <IncludePath>/usr/include;/usr/local/include;</IncludePath>
+    <LibraryPath>/usr/lib;/usr/local/lib;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <IncludePath>/usr/local/include;/usr/include</IncludePath>
-    <LibraryPath>/usr/local/lib;/usr/lib</LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
+    <IncludePath>/usr/include;/usr/local/include;</IncludePath>
+    <LibraryPath>/usr/lib;/usr/local/lib;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Link>
+      <LibraryDependencies>wiringPi</LibraryDependencies>
+    </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Link>
+      <LibraryDependencies>wiringPi</LibraryDependencies>
+    </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="MockDateTimeProvider.h" />
-    <ClInclude Include="MockDeviceHandler.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="DateTimeProvider.cpp" />
+    <ClCompile Include="LogHandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="DeviceHandlerTests.cpp" />
-    <ClCompile Include="MockDateTimeProvider.cpp" />
-    <ClCompile Include="MockDeviceHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Controller\DeviceController.vcxproj">
-      <Project>{0d33ca40-25aa-4581-b299-d21c942884a6}</Project>
-    </ProjectReference>
+    <ClInclude Include="DateTimeProvider.h" />
+    <ClInclude Include="IDateTimeProvider.h" />
+    <ClInclude Include="LogHandler.h" />
   </ItemGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <ClCompile>
-      <CppLanguageStandard>c++17</CppLanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <ClCompile>
-      <CppLanguageStandard>c++17</CppLanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
+  <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
