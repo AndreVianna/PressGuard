@@ -21,5 +21,4 @@ public static class ServiceCollectionExtensions {
         services.AddScoped<ISettingHandler, SettingHandler>();
         return services;
     }
-
 }
