@@ -1,0 +1,11 @@
+﻿@HostAddress = https://localhost:7110
+
+POST {{HostAddress}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "default.user@email.com",
+  "password": "Invalid"
+}
+
+###

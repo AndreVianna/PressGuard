@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{e82885bf-a6a6-4f84-aba8-1ed233ed926c}</ItemsProjectGuid>
+    <ItemsProjectName>Controller.Domain</ItemsProjectName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DateTimeProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)FileDataStore.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HubConnectionHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IDateTimeProvider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IDeviceHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LogHandler.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Messages.h" />
+  </ItemGroup>
+</Project>
