@@ -1,0 +1,32 @@
+name: Remote Service API (.NET)
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ "dev,main" ]
+  pull_request:
+    branches: [ "dev,main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dotnet ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+      - name: Restore dependencies
+        run: dotnet restore RemoteService/RemoteService.sln
+      - name: Build
+        run: dotnet build RemoteService/RemoteService.sln --no-restore
+      - name: Test
+        run: dotnet test RemoteService/RemoteService.sln --no-build --verbosity normal

@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Solution Items", "0 Solut
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.runsettings = .runsettings
+		..\..\.github\workflows\remote_service.yml = ..\..\.github\workflows\remote_service.yml
 	EndProjectSection
 EndProject
 Global
