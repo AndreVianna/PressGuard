@@ -1,12 +1,15 @@
-﻿namespace RemoteService.Extensions;
+﻿using RemoteService.Handlers.Tenants;
+using RemoteService.Handlers.Venues;
+
+namespace RemoteService.Extensions;
 
 public static class ServiceCollectionExtensions {
     public static IServiceCollection AddDomainHandlers<TTokenGenerator>(this IServiceCollection services, IConfiguration configuration)
         where TTokenGenerator : class, ITokenGenerator {
         services.AddTokenGenerator<TTokenGenerator>(configuration);
         services.TryAddScoped<IAuthHandler, AuthHandler>();
-        services.TryAddScoped<ISystemHandler, SystemHandler>();
-        services.TryAddScoped<ISettingHandler, SettingHandler>();
+        services.TryAddScoped<ITenantHandler, TenantHandler>();
+        services.TryAddScoped<IVenueHandler, VenueHandler>();
         return services;
     }
 

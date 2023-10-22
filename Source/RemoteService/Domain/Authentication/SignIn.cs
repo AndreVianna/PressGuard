@@ -1,6 +1,4 @@
-﻿using RemoteService.Constants;
-
-namespace RemoteService.Authentication;
+﻿namespace RemoteService.Authentication;
 
 public record SignIn : IValidatable {
     public required string Email { get; init; }
