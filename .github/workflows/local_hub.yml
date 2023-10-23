@@ -18,7 +18,7 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{hashFiles('**/Source/LocalHub/Client/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
@@ -26,9 +26,12 @@ jobs:
 
       - name: Run npm i
         run: npm i
+        working-directory: ./Source/LocalHub/Client
 
       - name: Run test:ci command
         run: npm run test:ci
+        working-directory: ./Source/LocalHub/Client
 
       - name: Run build:ci command
         run: npm run build:ci
+        working-directory: ./Source/LocalHub/Client
