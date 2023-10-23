@@ -8,8 +8,6 @@ public class PersistedTests {
         var id = Guid.NewGuid();
         var subject = new TestPersisted {
             Id = id,
-            Name = "TestPersisted",
-            Description = "Test persisted.",
         };
 
         subject.Id.Should().Be(id);

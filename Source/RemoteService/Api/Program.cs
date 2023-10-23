@@ -1,3 +1,5 @@
+using RemoteService.Communication;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var env = builder.Environment;
@@ -34,6 +36,7 @@ builder.Services.AddSystemUtilities();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUserAccessor, ApiUserAccessor>();
 builder.Services.AddScoped<IHasher, Hasher>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddDomainHandlers<TokenGenerator>(builder.Configuration);
 builder.Services.AddRepositories();
 builder.Services.AddScoped(sp => new CustomExceptionFilter(sp.GetRequiredService<ILoggerFactory>(), env));

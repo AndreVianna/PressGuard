@@ -1,6 +1,4 @@
-﻿using RemoteService.Models;
-using RemoteService.Models.Abstractions;
-using RemoteService.Repositories;
+﻿using RemoteService.Repositories;
 
 using static System.Results.CrudResult;
 
@@ -8,7 +6,7 @@ namespace RemoteService.Handlers;
 
 public class CrudHandler<TModel, TRowModel, TRepository>
     : ICrudHandler<TModel, TRowModel>
-    where TModel : class, IPersisted, IValidatable
+    where TModel : Persisted, IValidatable
     where TRowModel : Row
     where TRepository : IRepository<TModel, TRowModel> {
 

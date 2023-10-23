@@ -8,5 +8,5 @@ Content-Type: application/json
 
 ###
 
-GET https://localhost:7110/api/v1/systems
+GET https://localhost:7110/api/v1/tenants
 Accept: application/json

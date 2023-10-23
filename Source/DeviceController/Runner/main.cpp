@@ -1,22 +1,23 @@
-#include "DateTimeProvider.h"
-#include "FileDataStore.h"
-#include "DeviceHandler.h"
-#include "HubConnectionHandler.h"
-#include "LogHandler.h"
+#include "../Domain/DeviceHandler.h"
+
+#include <sys/types.h>
+
+using namespace std;
 
 int main(const int argc, char* argv[]) {
-    const auto logLevel = argc > 1 ? std::stoi(argv[1]) : 2;
-    const ushort deviceId = argc > 2 ? static_cast<ushort>(std::stoul(argv[2])) : 9002;
-    const auto numSensors = argc > 3 ? std::stoi(argv[3]) : DeviceHandler::DEFAULT_NUMBER_OF_SENSORS;
-    const auto sleepDelay = argc > 4 ? std::stoi(argv[4]) : DeviceHandler::DEFAULT_DELAY_BETWEEN_SCANS_IN_MILLISECONDS;
+    const auto logLevel = argc > 1 ? stoi(argv[1]) : 2;
+    const ushort deviceId = argc > 2 ? static_cast<ushort>(stoul(argv[2])) : 9002;
+    const auto numSensors = argc > 3 ? stoi(argv[3]) : SensorReader::DEFAULT_NUMBER_OF_SENSORS;
+    const auto sleepDelay = argc > 4 ? stoi(argv[4]) : SensorReader::DEFAULT_DELAY_BETWEEN_SCANS_IN_MILLISECONDS;
 
-    DateTimeProvider dateTime;
+    DateTimeProvider dateTime{};
     LogHandler logger(logLevel, &dateTime);
 
     try {
+        SensorReader reader(numSensors, sleepDelay, &logger);
         FileDataStore store(&dateTime);
-        HubConnectionHandler hub(deviceId, &logger);
-        const DeviceHandler deviceHandler(&store, &hub, &logger, numSensors, sleepDelay);
+        WebSocketConnection  hub(deviceId, &logger);
+        const DeviceHandler deviceHandler(&hub, &reader, &store, &logger);
 
         hub.Start();
 
@@ -25,7 +26,7 @@ int main(const int argc, char* argv[]) {
         }
     }
     catch (const std::exception& e) {
-        logger.LogError("An exception occurred: " + std::string(e.what()) + "\n");
+        logger.LogError("An exception occurred: " + string(e.what()) + "\n");
     }
 
     return 0;

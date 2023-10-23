@@ -102,8 +102,8 @@ public class AuthHandlerTests {
     private class TestRegisterData : TheoryData<SignOn, bool, string[]> {
         public TestRegisterData() {
             Add(new() { Email = _validEmail, Password = _validPassword, FirstName = "Some", LastName = "Name" }, true, Array.Empty<string>());
-            Add(new() { Email = "duplicated.user@email.com", Password = _validPassword }, false, Array.Empty<string>());
-            Add(new() { Email = null!, Password = null! }, false, new[] { "'Email' cannot be null.", "'Password' cannot be null." });
+            Add(new() { Email = "duplicated.user@email.com", Password = _validPassword, FirstName = null!, LastName = null! }, false, Array.Empty<string>());
+            Add(new() { Email = null!, Password = null!, FirstName = null!, LastName = null! }, false, new[] { "'Email' cannot be null.", "'Password' cannot be null." });
         }
     }
 

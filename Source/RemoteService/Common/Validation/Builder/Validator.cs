@@ -18,7 +18,7 @@ public abstract class Validator : IValidator {
         return this;
     }
 
-    public void Negate() => Mode ^= ValidatorMode.Not;
+    public void Negate() => Mode ^= Not;
 
     public void ClearErrors() => Result = Result.Success();
 

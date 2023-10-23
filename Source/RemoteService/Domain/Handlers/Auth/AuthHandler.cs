@@ -1,5 +1,4 @@
-﻿using RemoteService.Authentication;
-using RemoteService.Communication;
+﻿using RemoteService.Communication;
 using RemoteService.Repositories.User;
 
 using static System.Results.SignInResult;

@@ -1,10 +1,6 @@
-﻿using RemoteService.Handlers.Auth;
-using RemoteService.Models.Abstractions;
+﻿namespace RemoteService.Authentication;
 
-namespace RemoteService.Authentication;
-
-public record User : IValidatable, IPersisted {
-    public required Guid Id { get; init; }
+public record User : Persisted, IValidatable {
     public required string Email { get; init; }
     public bool IsConfirmed { get; init; }
     public HashedSecret? HashedPassword { get; init; }
@@ -19,8 +15,6 @@ public record User : IValidatable, IPersisted {
     public string? LastName { get; init; }
     [PersonalInformation]
     public DateOnly? Birthday { get; init; }
-
-    public DateTime ChangeStamp { get; init; }
 
     public Result Validate(IDictionary<string, object?>? context = null) {
         var result = Result.Success();

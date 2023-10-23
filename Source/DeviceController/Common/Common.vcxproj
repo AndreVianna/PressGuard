@@ -31,6 +31,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -40,6 +41,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -47,26 +49,27 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <IncludePath>/usr/include;/usr/local/include;</IncludePath>
-    <LibraryPath>/usr/lib;/usr/local/lib;</LibraryPath>
+    <IncludePath>
+    </IncludePath>
+    <LibraryPath>
+    </LibraryPath>
+    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <IncludePath>/usr/include;/usr/local/include;</IncludePath>
-    <LibraryPath>/usr/lib;/usr/local/lib;</LibraryPath>
+    <IncludePath>
+    </IncludePath>
+    <LibraryPath>
+    </LibraryPath>
+    <RemoteDeployDir>$(RemoteRootDir)/DeviceController</RemoteDeployDir>
+    <TargetName>libdccommon</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <Link>
-      <LibraryDependencies>wiringPi</LibraryDependencies>
-    </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <Link>
-      <LibraryDependencies>wiringPi</LibraryDependencies>
-    </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
@@ -75,14 +78,35 @@
   <ItemGroup>
     <ClCompile Include="DateTimeProvider.cpp" />
     <ClCompile Include="LogHandler.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DateTimeProvider.h" />
-    <ClInclude Include="IDateTimeProvider.h" />
     <ClInclude Include="LogHandler.h" />
   </ItemGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+    </Link>
+    <RemotePostBuildEvent>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+    </RemotePostBuildEvent>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
