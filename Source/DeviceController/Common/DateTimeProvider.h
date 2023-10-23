@@ -1,15 +1,10 @@
 ﻿#pragma once
 
-#include "IDateTimeProvider.h"
-
-#include <chrono>
 #include <string>
+using namespace std;
 
-class DateTimeProvider : public IDateTimeProvider {
+class DateTimeProvider {
 public:
-    std::string GetFormattedTime() override;
-    std::string GetFormattedDate() override;
-    ~DateTimeProvider() override = default;
-private:
-    static tm* TheadSafeUtcNow(const std::chrono::time_point<std::chrono::system_clock>& now);
+    string GetFormattedTime();
+    string GetFormattedDate();
 };

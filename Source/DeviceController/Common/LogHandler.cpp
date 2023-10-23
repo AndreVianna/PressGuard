@@ -1,48 +1,73 @@
 #include "DateTimeProvider.h"
-#include "LogHandler.h"
 
-#include <iosfwd>
+#include "LogHandler.h"
 #include <iostream>
-#include <ostream>
 #include <stdexcept>
 
-LogHandler::LogHandler(const int level, IDateTimeProvider* dateTime)
-    : Level(level) {
-    DateTime = dateTime;
+LogHandler::LogHandler()
+    : LogHandler(2, new DateTimeProvider()) {
+}
+
+LogHandler::LogHandler(const int level)
+    : LogHandler(level, new DateTimeProvider()) {
+}
+
+LogHandler::LogHandler(const int level, DateTimeProvider* dateTime)
+    : Level(level)
+    , DateTime(dateTime) {
     OpenOrCreateLogFile();
+}
+
+LogHandler::LogHandler(const LogHandler& other)
+    : LogHandler(other.Level, other.DateTime) {
 }
 
 LogHandler::~LogHandler() {
     CloseLogFile();
 }
 
+LogHandler& LogHandler::operator=(const LogHandler& other) {
+    if (this == &other) {
+        return *this;
+    }
 
-void LogHandler::LogDebug(const std::string& message) {
-    if (Level > 0) return;
-    Log("DEBUG", message);
+    Level = other.Level;
+    DateTime = other.DateTime;
+
+    return *this;
 }
 
-void LogHandler::LogInfo(const std::string& message) {
-    if (Level == -1 || Level > 1) return;
+int LogHandler::GetLogLevel() const
+{
+    return Level;
+}
+
+void LogHandler::LogDebug(const string& message) {
+    if (Level > 0) return;
+    Log(string("DEBUG"), message);
+}
+
+void LogHandler::LogInfo(const string& message) {
+    if (Level > 1) return;
     Log("INFO", message);
 }
 
-void LogHandler::LogWarning(const std::string& message) {
-    if (Level == -1 || Level > 2) return;
+void LogHandler::LogWarning(const string& message) {
+    if (Level > 2) return;
     Log("WARN", message);
 }
 
-void LogHandler::LogError(const std::string& message) {
+void LogHandler::LogError(const string& message) {
     if (Level > 3) return;
     Log("ERROR", message);
 }
 
-void LogHandler::Log(const std::string& level, const std::string& message) {
+void LogHandler::Log(const string& level, const string& message) {
     OpenOrCreateLogFile();
     const auto output = DateTime->GetFormattedTime() + ": [" + level + "] " + message;
-    File << output << "\n" << std::flush;
+    File << output << "\n" << flush;
     File.flush();
-    std::cerr << output << std::endl;
+    cerr << output << endl;
 }
 
 void LogHandler::CloseLogFile() {
@@ -55,7 +80,7 @@ void LogHandler::OpenOrCreateLogFile() {
     if (Name == currentDay) return;
     CloseLogFile();
     Name = currentDay;
-    File.open(Name + ".log", std::ios::app);
+    File.open(Name + ".log", ios::app);
     if (File.is_open()) return;
-    throw std::runtime_error("Failed to open or create log file.");
+    throw runtime_error("Failed to open or create log file.");
 }

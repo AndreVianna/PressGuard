@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{290e227d-8542-4b05-bcb8-2cfa3a1dfc42}</ProjectGuid>
+    <ProjectGuid>{CAAA318C-CA1A-4537-AD85-664DE3EFB827}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>DeviceController_Domain</RootNamespace>
+    <RootNamespace>DeviceController_SensorReader</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <RemoteProjectRelDir>Domain</RemoteProjectRelDir>
+    <RemoteProjectRelDir>SensorReader</RemoteProjectRelDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -50,55 +50,40 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <TargetName>libdcdomain</TargetName>
+    <TargetName>libdcreader</TargetName>
     <RemoteDeployDir>$(RemoteRootDir)/DeviceController</RemoteDeployDir>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <RemotePostBuildEvent>
-      <Command>gpio export 17 out</Command>
-      <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
-    </RemotePostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <RemotePostBuildEvent>
-      <Command>gpio export 17 out</Command>
-      <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
-    </RemotePostBuildEvent>
-  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DeviceHandler.h" />
+    <ClCompile Include="Messages.cpp" />
+    <ClCompile Include="SensorReader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DeviceHandler.cpp" />
+    <ClInclude Include="Messages.h" />
+    <ClInclude Include="SensorReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">
       <Project>{04747ddd-8de1-407f-bbe6-f571b4d64e5f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Connection\DeviceController.Connection.vcxproj">
-      <Project>{c82e8dbc-a6fa-4c87-ab66-1a78c8ff399b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DeviceController.DataAccess.vcxproj">
-      <Project>{10bc0ca5-c2aa-49bd-8dec-d1d521adb764}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SensorReader\DeviceController.SensorReader.vcxproj">
-      <Project>{caaa318c-ca1a-4537-ad85-664de3efb827}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lpigpio;-lpigpiod_if;-lpigpiod_if2</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
       <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lpigpio;-lpigpiod_if;-lpigpiod_if2</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

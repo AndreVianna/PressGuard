@@ -19,21 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0D33CA40-25AA-4581-B299-D21C942884A6}</ProjectGuid>
+    <ProjectGuid>{c82e8dbc-a6fa-4c87-ab66-1a78c8ff399b}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>DeviceController2</RootNamespace>
+    <RootNamespace>DeviceController_Connection</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Raspberry</TargetLinuxPlatform>
     <LinuxProjectType>{8748239F-558C-44D1-944B-07B09C35B330}</LinuxProjectType>
-    <ProjectName>DeviceController.Runner</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -43,89 +41,57 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteRootDir>~/projects</RemoteRootDir>
-    <RemoteProjectRelDir>Runner</RemoteProjectRelDir>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <RemoteProjectRelDir>Connection</RemoteProjectRelDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <IncludePath>
-    </IncludePath>
-    <LibraryPath>
-    </LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
-    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <IncludePath>
-    </IncludePath>
-    <LibraryPath>
-    </LibraryPath>
+    <TargetName>libdcconnection</TargetName>
     <RemoteDeployDir>$(RemoteRootDir)/DeviceController</RemoteDeployDir>
-    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>controller</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <Link>
-      <LibraryDependencies>
-      </LibraryDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lpigpio;-lpigpiod_if;-lpigpiod_if2</AdditionalDependencies>
-    </Link>
     <RemotePostBuildEvent>
-      <Command>
-      </Command>
-      <Message>
-      </Message>
+      <Command>gpio export 17 out</Command>
+      <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
-    <ClCompile>
-      <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
-    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <Link>
-      <LibraryDependencies>pigpio</LibraryDependencies>
-    </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="WebSocketConnection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WebSocketConnection.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">
       <Project>{04747ddd-8de1-407f-bbe6-f571b4d64e5f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Connection\DeviceController.Connection.vcxproj">
-      <Project>{c82e8dbc-a6fa-4c87-ab66-1a78c8ff399b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DeviceController.DataAccess.vcxproj">
-      <Project>{10bc0ca5-c2aa-49bd-8dec-d1d521adb764}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain\DeviceController.Domain.vcxproj">
-      <Project>{290e227d-8542-4b05-bcb8-2cfa3a1dfc42}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SensorReader\DeviceController.SensorReader.vcxproj">
-      <Project>{caaa318c-ca1a-4537-ad85-664de3efb827}</Project>
-    </ProjectReference>
   </ItemGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
-      <Verbose>false</Verbose>
-      <CppLanguageStandard>c++17</CppLanguageStandard>
-      <CLanguageStandard>c11</CLanguageStandard>
       <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lpigpio;-lpigpiod_if;-lpigpiod_if2</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
-      <ShowProgress>false</ShowProgress>
-      <VerboseOutput>false</VerboseOutput>
+      <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

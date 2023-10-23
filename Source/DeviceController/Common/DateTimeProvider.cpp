@@ -1,31 +1,46 @@
 #include "DateTimeProvider.h"
+
 #include <chrono>
-#include <ctime>
-#include <mutex>
 
-std::mutex mutexLock;
+struct DateTime {
+    int Year;
+    int Month;
+    int Day;
+    int Hour;
+    int Minutes;
+    int Seconds;
+    int Milliseconds;
+};
 
-tm* DateTimeProvider::TheadSafeUtcNow(const std::chrono::time_point<std::chrono::system_clock>& now)
-{
-    const auto timeNow = std::chrono::system_clock::to_time_t(now);
-    std::lock_guard lock(mutexLock);
-    return std::gmtime(&timeNow);  // NOLINT(concurrency-mt-unsafe) - used lock_guard to make this thread safe.
+DateTime GetCurrentDateTime() {
+    using namespace chrono;
+    const auto now = system_clock::now();
+    const auto tt = system_clock::to_time_t(now);
+    tm tm;
+    gmtime_r(&tt, &tm);
+    const auto ms = (duration_cast<milliseconds>(now.time_since_epoch()) % 1000).count();
+    const DateTime dateTime{
+        .Year = tm.tm_year + 1900,
+        .Month = tm.tm_mon + 1,
+        .Day = tm.tm_mday,
+        .Hour = tm.tm_hour,
+        .Minutes = tm.tm_min,
+        .Seconds = tm.tm_sec,
+        .Milliseconds = static_cast<int>(ms)
+    };
+    return dateTime;
 }
 
-std::string DateTimeProvider::GetFormattedDate() {
-    const auto tm = TheadSafeUtcNow(std::chrono::system_clock::now());
-
+string DateTimeProvider::GetFormattedDate() {
+    const auto [Year, Month, Day, Hour, Minutes, Seconds, Milliseconds] = GetCurrentDateTime();
     char buffer[10];
-    sprintf(buffer, "%04d%02d%02d", (1900 + tm->tm_year), tm->tm_mon, tm->tm_mday);  // NOLINT(cert-err33-c) - No need to check return size here.
+    sprintf(buffer, "%04d%02d%02d", (1900 + Year), Month, Day);  // NOLINT(cert-err33-c) - No need to check return size here.
     return { buffer };
 }
 
-std::string DateTimeProvider::GetFormattedTime() {
-    const auto now = std::chrono::system_clock::now();
-    const auto tm = TheadSafeUtcNow(now);
-    const auto milliseconds = (std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000).count();
-
+string DateTimeProvider::GetFormattedTime() {
+    const auto [Year, Month, Day, Hour, Minutes, Seconds, Milliseconds] = GetCurrentDateTime();
     char buffer[14];
-    sprintf(buffer, "%02d:%02d:%02d.%03lld", tm->tm_hour, tm->tm_min, tm->tm_sec, milliseconds);  // NOLINT(cert-err33-c) - No need to check return size here.
+    sprintf(buffer, "%02d:%02d:%02d.%03d", Hour, Minutes, Seconds, Milliseconds);  // NOLINT(cert-err33-c) - No need to check return size here.
     return { buffer };
 }
