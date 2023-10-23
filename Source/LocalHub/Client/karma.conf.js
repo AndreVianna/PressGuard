@@ -39,6 +39,13 @@ module.exports = function (config) {
         browsers: ['Chrome'],
         singleRun: false,
         restartOnFileChange: true,
+        restartOnFileChange: true,
+        customLaunchers: {
+            ChromeHeadlessCustom: {
+                base: 'ChromeHeadless',
+                flags: ['--no-sandbox', '--disable-gpu']
+            }
+        },
         listenAddress: 'localhost',
         hostname: 'localhost'
     });
