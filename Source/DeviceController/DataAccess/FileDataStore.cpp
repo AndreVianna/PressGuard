@@ -1,10 +1,10 @@
 #include "FileDataStore.h"
 
 FileDataStore::FileDataStore()
-    : FileDataStore(new DateTimeProvider()) {
+    : FileDataStore(new DateTimeFormatter()) {
 }
 
-FileDataStore::FileDataStore(DateTimeProvider* dateTime)
+FileDataStore::FileDataStore(DateTimeFormatter* dateTime)
     : DateTime(dateTime) {
     OpenOrCreateFile();
 }
@@ -28,7 +28,7 @@ FileDataStore::~FileDataStore() {
 
 string FileDataStore::Save(const string& message) {
     OpenOrCreateFile();
-    auto output = DateTime->GetFormattedTime() + "," + message;
+    auto output = DateTime->GetTime() + "," + message;
     File << output << "\n" << flush;
     File.flush();
     return { output };
@@ -40,7 +40,7 @@ void FileDataStore::CloseFile() {
 }
 
 void FileDataStore::OpenOrCreateFile() {
-    const auto currentDay = DateTime->GetFormattedDate();
+    const auto currentDay = DateTime->GetDate();
     if (Name == currentDay) return;
     CloseFile();
     Name = currentDay;

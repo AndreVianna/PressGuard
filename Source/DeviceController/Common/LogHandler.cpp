@@ -1,86 +1,61 @@
-#include "DateTimeProvider.h"
+#include "DateTimeFormatter.h"
 
 #include "LogHandler.h"
 #include <iostream>
 #include <stdexcept>
 
-LogHandler::LogHandler()
-    : LogHandler(2, new DateTimeProvider()) {
-}
-
-LogHandler::LogHandler(const int level)
-    : LogHandler(level, new DateTimeProvider()) {
-}
-
-LogHandler::LogHandler(const int level, DateTimeProvider* dateTime)
-    : Level(level)
-    , DateTime(dateTime) {
+LogHandler::LogHandler(const int level, DateTimeFormatter* dateTime, File* file)
+    : _level(level),
+    _dateTime(dateTime),
+    _file(file) {
     OpenOrCreateLogFile();
-}
-
-LogHandler::LogHandler(const LogHandler& other)
-    : LogHandler(other.Level, other.DateTime) {
 }
 
 LogHandler::~LogHandler() {
     CloseLogFile();
 }
 
-LogHandler& LogHandler::operator=(const LogHandler& other) {
-    if (this == &other) {
-        return *this;
-    }
-
-    Level = other.Level;
-    DateTime = other.DateTime;
-
-    return *this;
-}
-
-int LogHandler::GetLogLevel() const
-{
-    return Level;
+int LogHandler::GetLogLevel() const  {
+    return _level;
 }
 
 void LogHandler::LogDebug(const string& message) {
-    if (Level > 0) return;
+    if (_level > 0) return;
     Log(string("DEBUG"), message);
 }
 
 void LogHandler::LogInfo(const string& message) {
-    if (Level > 1) return;
+    if (_level > 1) return;
     Log("INFO", message);
 }
 
 void LogHandler::LogWarning(const string& message) {
-    if (Level > 2) return;
+    if (_level > 2) return;
     Log("WARN", message);
 }
 
 void LogHandler::LogError(const string& message) {
-    if (Level > 3) return;
+    if (_level > 3) return;
     Log("ERROR", message);
 }
 
 void LogHandler::Log(const string& level, const string& message) {
     OpenOrCreateLogFile();
-    const auto output = DateTime->GetFormattedTime() + ": [" + level + "] " + message;
-    File << output << "\n" << flush;
-    File.flush();
+    const auto output = _dateTime->GetTime() + ": [" + level + "] " + message;
+    _file->AppendLine(output);
     cerr << output << endl;
 }
 
-void LogHandler::CloseLogFile() {
-    if (!File.is_open()) return;
-    File.close();
+void LogHandler::CloseLogFile() const {
+    _file->Close();
 }
 
 void LogHandler::OpenOrCreateLogFile() {
-    const auto currentDay = DateTime->GetFormattedDate();
-    if (Name == currentDay) return;
+    const auto currentDay = _dateTime->GetDate();
+    if (_name == currentDay) return;
     CloseLogFile();
-    Name = currentDay;
-    File.open(Name + ".log", ios::app);
-    if (File.is_open()) return;
+    _name = currentDay;
+    _file->Open(_name + ".log");
+    if (_file->IsOpen()) return;
     throw runtime_error("Failed to open or create log file.");
 }

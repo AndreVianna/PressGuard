@@ -54,6 +54,7 @@
     <LibraryPath>
     </LibraryPath>
     <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
+    <TargetName>libdccommon</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <IncludePath>
@@ -76,12 +77,13 @@
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DateTimeProvider.cpp" />
+    <ClCompile Include="DateTimeFormatter.cpp" />
     <ClCompile Include="LogHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DateTimeProvider.h" />
+    <ClInclude Include="DateTimeFormatter.h" />
     <ClInclude Include="LogHandler.h" />
+    <ClInclude Include="SystemFile.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>

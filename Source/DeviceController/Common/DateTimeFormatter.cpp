@@ -1,18 +1,8 @@
-#include "DateTimeProvider.h"
+#include "DateTimeFormatter.h"
 
 #include <chrono>
 
-struct DateTime {
-    int Year;
-    int Month;
-    int Day;
-    int Hour;
-    int Minutes;
-    int Seconds;
-    int Milliseconds;
-};
-
-DateTime GetCurrentDateTime() {
+DateTime DateTimeProvider::Now() {
     using namespace chrono;
     const auto now = system_clock::now();
     const auto tt = system_clock::to_time_t(now);
@@ -31,15 +21,15 @@ DateTime GetCurrentDateTime() {
     return dateTime;
 }
 
-string DateTimeProvider::GetFormattedDate() {
-    const auto [Year, Month, Day, Hour, Minutes, Seconds, Milliseconds] = GetCurrentDateTime();
+string DateTimeFormatter::GetDate() const {
+    const auto [Year, Month, Day, Hour, Minutes, Seconds, Milliseconds] = _dateTime->Now();
     char buffer[10];
-    sprintf(buffer, "%04d%02d%02d", (1900 + Year), Month, Day);  // NOLINT(cert-err33-c) - No need to check return size here.
+    sprintf(buffer, "%04d%02d%02d", Year, Month, Day);  // NOLINT(cert-err33-c) - No need to check return size here.
     return { buffer };
 }
 
-string DateTimeProvider::GetFormattedTime() {
-    const auto [Year, Month, Day, Hour, Minutes, Seconds, Milliseconds] = GetCurrentDateTime();
+string DateTimeFormatter::GetTime() const {
+    const auto [Year, Month, Day, Hour, Minutes, Seconds, Milliseconds] = _dateTime->Now();
     char buffer[14];
     sprintf(buffer, "%02d:%02d:%02d.%03d", Hour, Minutes, Seconds, Milliseconds);  // NOLINT(cert-err33-c) - No need to check return size here.
     return { buffer };

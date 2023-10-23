@@ -10,7 +10,7 @@ int main(const int argc, char* argv[]) {
     const auto numSensors = argc > 3 ? stoi(argv[3]) : SensorReader::DEFAULT_NUMBER_OF_SENSORS;
     const auto sleepDelay = argc > 4 ? stoi(argv[4]) : SensorReader::DEFAULT_DELAY_BETWEEN_SCANS_IN_MILLISECONDS;
 
-    DateTimeProvider dateTime{};
+    DateTimeFormatter dateTime{};
     LogHandler logger(logLevel, &dateTime);
 
     try {

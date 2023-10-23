@@ -1,15 +1,11 @@
 #pragma once
 
-#include "DateTimeProvider.h"
-#include <fstream>
+#include "DateTimeFormatter.h"
+#include "SystemFile.h"
 
 class LogHandler {
 public:
-    explicit LogHandler();
-    explicit LogHandler(int level);
-    explicit LogHandler(int level, DateTimeProvider* dateTime);
-    LogHandler(const LogHandler& other);
-    LogHandler& operator=(const LogHandler& other);
+    explicit LogHandler(const int level = 2, DateTimeFormatter* dateTime = new DateTimeFormatter(), File* file = new SystemFile());
     ~LogHandler();
 
     [[nodiscard]] int GetLogLevel() const;
@@ -18,13 +14,13 @@ public:
     void LogWarning(const string& message);
     void LogError(const string& message);
 private:
-    int Level;
+    int _level;
 
     void Log(const string& level, const string& message);
     void OpenOrCreateLogFile();
-    void CloseLogFile();
+    void CloseLogFile() const;
 
-    DateTimeProvider* DateTime;
-    ofstream File;
-    string Name;
+    DateTimeFormatter* _dateTime;
+    File* _file;
+    string _name;
 };

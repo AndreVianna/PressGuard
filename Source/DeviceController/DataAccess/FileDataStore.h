@@ -2,14 +2,14 @@
 
 #include <fstream>
 #include <iosfwd>
-#include "../Common/DateTimeProvider.h"
+#include "../Common/DateTimeFormatter.h"
 
 using namespace std;
 
 class FileDataStore {
 public:
     FileDataStore();
-    explicit FileDataStore(DateTimeProvider* dateTime);
+    explicit FileDataStore(DateTimeFormatter* dateTime);
     FileDataStore(const FileDataStore& other);
     FileDataStore(FileDataStore&& other) noexcept = default;
 
@@ -21,7 +21,7 @@ public:
 private:
     void OpenOrCreateFile();
     void CloseFile();
-    DateTimeProvider* DateTime;
+    DateTimeFormatter* DateTime;
     ofstream File;
     string Name;
 };

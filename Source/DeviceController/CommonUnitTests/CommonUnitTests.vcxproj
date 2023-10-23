@@ -19,21 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6BD90C13-2D5D-4967-807B-00924980BE2F}</ProjectGuid>
+    <ProjectGuid>{2d59a4d1-d47c-446e-9e30-88a85eaee23d}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>DeviceController_UnitTests</RootNamespace>
+    <RootNamespace>CommonUnitTests</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Raspberry</TargetLinuxPlatform>
     <LinuxProjectType>{8748239F-558C-44D1-944B-07B09C35B330}</LinuxProjectType>
-    <ProjectName>DeviceController.Runner.UnitTests</ProjectName>
+    <ProjectName>Common.UnitTests</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
+    <RemoteProjectRelDir>CommonUnitTests</RemoteProjectRelDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -43,60 +42,65 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <RemoteProjectRelDir>$(ProjectName)/source</RemoteProjectRelDir>
-    <RemoteRootDir>/usr/local/projects</RemoteRootDir>
+    <RemoteProjectRelDir>CommonUnitTests</RemoteProjectRelDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <IncludePath>/usr/local/include;/usr/include</IncludePath>
-    <LibraryPath>/usr/local/lib;/usr/lib</LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <IncludePath>/usr/local/include;/usr/include</IncludePath>
-    <LibraryPath>/usr/local/lib;/usr/lib</LibraryPath>
-    <RemoteDeployDir>$(RemoteRootDir)/$(ProjectName)/deploy</RemoteDeployDir>
+    <TargetName>commontests</TargetName>
+    <RemoteDeployDir>$(RemoteRootDir)/DeviceController</RemoteDeployDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <TargetName>commontests</TargetName>
+    <RemoteDeployDir>$(RemoteRootDir)/DeviceController</RemoteDeployDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lgtest;-lgtest_main</AdditionalDependencies>
+    </Link>
     <RemotePostBuildEvent>
       <Command>gpio export 17 out</Command>
       <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
     </RemotePostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <RemotePostBuildEvent>
-      <Command>gpio export 17 out</Command>
-      <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
-    </RemotePostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="MockDateTimeProvider.h" />
-    <ClInclude Include="MockDeviceHandler.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="DeviceHandlerTests.cpp" />
-    <ClCompile Include="MockDateTimeProvider.cpp" />
-    <ClCompile Include="MockDeviceHandler.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Controller\DeviceController.vcxproj">
-      <Project>{0d33ca40-25aa-4581-b299-d21c942884a6}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
+      <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Link>
+      <LibraryDependencies>wiringPi</LibraryDependencies>
+    </Link>
+    <RemotePostBuildEvent>
+      <Command>gpio export 17 out</Command>
+      <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
+    </RemotePostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="DateTimeFormattorTests.cpp" />
+    <ClCompile Include="LogHanderTests.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.vcxproj">
+      <Project>{04747ddd-8de1-407f-bbe6-f571b4d64e5f}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
       <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalIncludeDirectories>%(ClCompile.AdditionalIncludeDirectories);/usr/include;/usr/local/include</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>%(Link.AdditionalLibraryDirectories);/usr/lib;/usr/local/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-lgtest;-lgtest_main</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
