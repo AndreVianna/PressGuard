@@ -1,6 +1,10 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { LoggerComponent } from 'src/app/components/logger/logger.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
+import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component';
+import { DeviceComponent } from 'src/app/components/device/device.component';
 
 describe('AppComponent', () => {
     let component: AppComponent;
@@ -9,7 +13,13 @@ describe('AppComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [AppComponent],
+            declarations: [
+                AppComponent,
+                HeaderComponent,
+                LoggerComponent,
+                DashboardComponent,
+                DeviceComponent,
+            ],
             imports: [HttpClientTestingModule]
         }).compileComponents();
     });

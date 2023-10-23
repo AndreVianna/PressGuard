@@ -1,4 +1,4 @@
-export interface Log {
-    Level: number;
-    Message: string | JSON;
+export class Log {
+    Level: number = 2;
+    Message: string | JSON | null = null;
 }
