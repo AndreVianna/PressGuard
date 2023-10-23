@@ -1,0 +1,10 @@
+<div class="card mb-4">
+    <div class="card-header">
+        Device ID: {{ device.Id }}
+    </div>
+    <div class="d-flex flex-wrap justify-content-around">
+        <div class="sensor-value-cell" *ngFor="let value of device.SensorValues">
+            {{ value }}
+        </div>
+    </div>
+</div>

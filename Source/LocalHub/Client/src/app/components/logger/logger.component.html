@@ -1,0 +1,8 @@
+<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#logsPanel" aria-expanded="false">
+    Toggle Logs
+</button>
+<div class="collapse" id="logsPanel">
+    <pre class="log-container">
+        <code *ngFor="let log of logs">{{ log }}<br></code>
+    </pre>
+</div>
