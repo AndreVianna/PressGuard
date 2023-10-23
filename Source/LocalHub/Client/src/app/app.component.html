@@ -1,40 +1,13 @@
-<!-- Header -->
-<div class="bg-primary text-white text-center py-2">
-    <h1>Dashboard</h1>
-    <p>Fake User | {{ currentDateTime }}</p>
-</div>
+<app-header></app-header>
 
-<!-- Main Content -->
 <div class="container-fluid">
     <div class="row">
-        <!-- Logs Panel (Collapsible) -->
         <div class="col-md-3">
-            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#logsPanel" aria-expanded="false">
-                Toggle Logs
-            </button>
-            <div class="collapse" id="logsPanel">
-                <pre class="log-container">
-                    <code *ngFor="let log of logs">{{ log }}<br></code>
-                </pre>
-            </div>
+            <logger></logger>
         </div>
 
-        <!-- Devices Dashboard -->
         <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-4" *ngFor="let device of devices | keyvalue">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            Device ID: {{ device.key }}
-                        </div>
-                        <div class="d-flex flex-wrap justify-content-around">
-                            <div class="sensor-value-cell" *ngFor="let value of device.value.SensorValues">
-                                {{ value }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <app-dashboard [devices]="devices"></app-dashboard>
         </div>
     </div>
 </div>

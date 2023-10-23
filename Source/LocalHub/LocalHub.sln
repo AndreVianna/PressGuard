@@ -7,6 +7,9 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "LocalHub.Client", "Client\L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F8AAED62-E849-4AAF-91C4-C363DDED2437}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.eslintrc.json = .eslintrc.json
+		Client\.gitignore = Client\.gitignore
 		ExecuteCleanUp.cmd = ExecuteCleanUp.cmd
 	EndProjectSection
 EndProject

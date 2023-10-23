@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let device of devices | keyvalue">
+        <app-device [device]="device.value"></app-device>
+    </div>
+</div>
